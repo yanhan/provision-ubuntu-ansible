@@ -1,0 +1,43 @@
+- name: apt-get update if last update was > 1 day ago
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: install vim
+  apt: name=vim state=present
+
+- name: install screen
+  apt: name=screen state=present
+
+- name: install tmux
+  apt: name=tmux state=present
+
+- name: install zsh
+  apt: name=zsh state=present
+
+- name: install gcc
+  apt: name=gcc state=present
+
+- name: install g++
+  apt: name=g++ state=present
+
+- name: install make
+  apt: name=make state=present
+
+- name: install curl
+  apt: name=curl state=present
+
+- name: install unzip
+  apt: name=unzip state=present
+
+- name: install xsel
+  apt: name=xsel state=present
+
+- name: install git
+  apt: name=git state=present
+
+- name: install sqlite3
+  apt: name=sqlite3 state=present
+
+- name: install chromium-browser
+  apt: name=chromium-browser state=present
+
+- include: install_dotfiles.yml

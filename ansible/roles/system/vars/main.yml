@@ -1,0 +1,4 @@
+home_path: /home/philip
+dotfiles_repo_path: "{{home_path}}/dotfiles"
+vundle_repo_path: "{{home_path}}/.vim/bundle/Vundle.vim"
+password_file_path: "{{home_path}}/provision-linux/ansible/roles/system/files/password.txt"

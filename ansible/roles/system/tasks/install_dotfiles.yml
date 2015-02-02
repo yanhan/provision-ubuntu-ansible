@@ -1,0 +1,58 @@
+- name: check if oh my zsh is installed
+  shell: test -d .oh-my-zsh
+  args:
+    chdir: "{{home_path}}"
+  register: oh_my_zsh_installed
+  ignore_errors: true
+  sudo_user: philip
+
+- name: clone oh my zsh repository
+  shell: >
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&
+      cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  when: oh_my_zsh_installed.rc != 0
+  sudo_user: philip
+
+- name: change to use zsh shell
+  shell: cat "{{password_file_path}}" | chsh -s $(which zsh) philip
+  when: oh_my_zsh_installed.rc != 0
+
+- name: ensure my dotfiles git repository exists
+  git: repo=https://github.com/yanhan/dotfiles.git
+       dest="{{dotfiles_repo_path}}"
+       force=no
+       update=no
+  register: dotfiles_git_repo
+  sudo_user: philip
+
+- name: dotfiles repo - check git remote origin is in git protocol
+  shell: git remote -v | grep '^origin' | grep 'git@github.com:'
+  args:
+    chdir: "{{dotfiles_repo_path}}"
+  register: dotfiles_origin_check
+  ignore_errors: true
+
+- name: dotfiles repo - change remote origin
+  shell: git remote rm origin && git remote add origin git@github.com:yanhan/dotfiles.git
+  args:
+    chdir: "{{dotfiles_repo_path}}"
+  when: dotfiles_origin_check.rc != 0
+
+- name: setup dotfiles repository
+  shell: python setup_home_folder_dotfiles.py gitconfig vimrc zshrc
+  args:
+    chdir: "{{dotfiles_repo_path}}"
+  when: dotfiles_git_repo.changed
+  sudo_user: philip
+
+- name: ensure Vundle git repository exists
+  git: repo=https://github.com/gmarik/Vundle.vim.git
+       dest="{{vundle_repo_path}}"
+       version=v0.10.2
+  register: vundle_git_repo
+  sudo_user: philip
+
+- name: install Vim plugins
+  shell: yes | vim +PluginInstall +qall
+  when: vundle_git_repo.changed
+  sudo_user: philip
