@@ -37,6 +37,12 @@
 - name: install sqlite3
   apt: name=sqlite3 state=present
 
+- name: install r-base
+  apt: name=r-base state=present
+
+- name: install r-base-core
+  apt: name=r-base-core state=present
+
 - name: install chromium-browser
   apt: name=chromium-browser state=present
 
