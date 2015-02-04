@@ -43,6 +43,9 @@
 - name: install r-base-core
   apt: name=r-base-core state=present
 
+- name: install pwgen
+  apt: name=pwgen state=present
+
 - name: install chromium-browser
   apt: name=chromium-browser state=present
 
