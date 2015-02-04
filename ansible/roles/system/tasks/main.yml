@@ -34,6 +34,9 @@
 - name: install tcl8.6
   apt: name=tcl8.6 state=present
 
+- name: install tcl8.6-dev
+  apt: name=tcl8.6-dev state=present
+
 - name: install zlib1g-dev
   apt: name=zlib1g-dev state=present
 
