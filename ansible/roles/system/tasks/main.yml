@@ -58,6 +58,9 @@
 - name: install libssl-dev
   apt: name=libssl-dev state=present
 
+- name: install libbz2-dev
+  apt: name=libbz2-dev state=present
+
 - name: install libsqlite3-dev
   apt: name=libsqlite3-dev state=present
 
