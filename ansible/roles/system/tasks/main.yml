@@ -67,6 +67,9 @@
 - name: install libsqlite3-dev
   apt: name=libsqlite3-dev state=present
 
+- name: install libncurses5-dev
+  apt: name=libncurses5-dev state=present
+
 - name: install unzip
   apt: name=unzip state=present
 
