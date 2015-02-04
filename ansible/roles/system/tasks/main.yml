@@ -34,6 +34,9 @@
 - name: install liblzma-dev
   apt: name=liblzma-dev state=present
 
+- name: install libcurl4-openssl-dev
+  apt: name=libcurl4-openssl-dev state=present
+
 - name: install curl
   apt: name=curl state=present
 
