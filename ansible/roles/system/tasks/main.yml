@@ -61,6 +61,9 @@
 - name: install libbz2-dev
   apt: name=libbz2-dev state=present
 
+- name: install libexpat1-dev
+  apt: name=libexpat1-dev state=present
+
 - name: install libsqlite3-dev
   apt: name=libsqlite3-dev state=present
 
