@@ -28,6 +28,9 @@
 - name: install curl
   apt: name=curl state=present
 
+- name: install expat
+  apt: name=expat state=present
+
 - name: install zlib1g-dev
   apt: name=zlib1g-dev state=present
 
