@@ -73,6 +73,9 @@
 - name: install libpcre3
   apt: name=libpcre3 state=present
 
+- name: install libpcre3-dev
+  apt: name=libpcre3-dev state=present
+
 - name: install unzip
   apt: name=unzip state=present
 
