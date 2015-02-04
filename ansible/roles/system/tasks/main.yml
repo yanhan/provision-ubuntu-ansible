@@ -25,6 +25,9 @@
 - name: install gdb
   apt: name=gdb state=present
 
+- name: install curl
+  apt: name=curl state=present
+
 - name: install zlib1g-dev
   apt: name=zlib1g-dev state=present
 
@@ -39,9 +42,6 @@
 
 - name: install libssl-dev
   apt: name=libssl-dev state=present
-
-- name: install curl
-  apt: name=curl state=present
 
 - name: install unzip
   apt: name=unzip state=present
