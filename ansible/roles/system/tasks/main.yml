@@ -70,6 +70,9 @@
 - name: install libncurses5-dev
   apt: name=libncurses5-dev state=present
 
+- name: install libpcre3
+  apt: name=libpcre3 state=present
+
 - name: install unzip
   apt: name=unzip state=present
 
