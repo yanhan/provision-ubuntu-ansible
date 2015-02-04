@@ -37,6 +37,9 @@
 - name: install libcurl4-openssl-dev
   apt: name=libcurl4-openssl-dev state=present
 
+- name: install libssl-dev
+  apt: name=libssl-dev state=present
+
 - name: install curl
   apt: name=curl state=present
 
