@@ -28,6 +28,9 @@
 - name: install lzma-dev
   apt: name=lzma-dev state=present
 
+- name: install liblzma-dev
+  apt: name=liblzma-dev state=present
+
 - name: install curl
   apt: name=curl state=present
 
