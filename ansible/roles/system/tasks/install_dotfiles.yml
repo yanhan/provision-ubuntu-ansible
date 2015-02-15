@@ -21,7 +21,6 @@
   git: repo=https://github.com/yanhan/dotfiles.git
        dest="{{dotfiles_repo_path}}"
        force=no
-       update=no
   register: dotfiles_git_repo
   sudo_user: philip
 
