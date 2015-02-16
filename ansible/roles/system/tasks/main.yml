@@ -115,3 +115,6 @@
 
 - name: install scrot
   apt: name=scrot state=present
+
+- name: install gimp
+  apt: name=gimp state=present
