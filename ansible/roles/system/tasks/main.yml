@@ -112,3 +112,6 @@
   shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   when: dropbox_installed.rc != 0
   sudo_user: philip
+
+- name: install scrot
+  apt: name=scrot state=present
