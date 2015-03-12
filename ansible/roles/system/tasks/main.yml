@@ -118,3 +118,15 @@
 
 - name: install gimp
   apt: name=gimp state=present
+
+- name: install virtualbox
+  apt: name=virtualbox state=present
+
+- name: install virtualbox-guest-additions-iso
+  apt: name=virtualbox-guest-additions-iso state=present
+
+- name: install virtualbox-guest-utils
+  apt: name=virtualbox-guest-utils state=present
+
+- name: install virtualbox-guest-x11
+  apt: name=virtualbox-guest-x11 state=present
