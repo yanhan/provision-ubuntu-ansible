@@ -130,3 +130,12 @@
 
 - name: install virtualbox-guest-x11
   apt: name=virtualbox-guest-x11 state=present
+
+- name: check if vagrant is installed
+  shell: sudo dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
+  ignore_errors: true
+  register: vagrant_installed
+
+- name: install vagrant 1.7.2
+  shell: wget 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb' -O /tmp/vagrant_1.7.2_x86_64.deb && sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
+  when: vagrant_installed.rc != 0
