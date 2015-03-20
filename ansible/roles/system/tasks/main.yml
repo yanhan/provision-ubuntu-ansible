@@ -22,6 +22,9 @@
 - name: install make
   apt: name=make state=present
 
+- name: install openjdk-7-jdk
+  apt: name=openjdk-7-jdk state=present
+
 - name: install gdb
   apt: name=gdb state=present
 
