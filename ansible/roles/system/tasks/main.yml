@@ -1,3 +1,12 @@
+- name: import GPG key for ffmpeg ppa
+  apt_key: keyserver=keyserver.ubuntu.com id=8E51A6D660CD88D67D65221D90BD7EACED8E640A state=present
+
+- name: add ffmpeg ppa for installing ffmpeg
+  apt_repository: repo='deb http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main' state=present update_cache=yes
+
+- name: add ffmpeg source ppa for installing ffmpeg
+  apt_repository: repo='deb-src http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main' state=present update_cache=yes
+
 - name: apt-get update if last update was > 1 day ago
   apt: update_cache=yes cache_valid_time=86400
 
@@ -142,3 +151,9 @@
 - name: install vagrant 1.7.2
   shell: wget 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb' -O /tmp/vagrant_1.7.2_x86_64.deb && sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
   when: vagrant_installed.rc != 0
+
+- name: install ffmpeg
+  apt: name=ffmpeg state=present
+
+- name: install gstreamer0.10-ffmpeg
+  apt: name=gstreamer0.10-ffmpeg state=present
