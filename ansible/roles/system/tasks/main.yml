@@ -157,3 +157,9 @@
 
 - name: install gstreamer0.10-ffmpeg
   apt: name=gstreamer0.10-ffmpeg state=present
+
+- name: install flashplugin-installer
+  apt: name=flashplugin-installer state=present
+
+- name: install pepperflashplugin-nonfree
+  apt: name=pepperflashplugin-nonfree state=present
