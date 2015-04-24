@@ -163,3 +163,6 @@
 
 - name: install pepperflashplugin-nonfree
   apt: name=pepperflashplugin-nonfree state=present
+
+- name: install texlive
+  apt: name=texlive state=present
