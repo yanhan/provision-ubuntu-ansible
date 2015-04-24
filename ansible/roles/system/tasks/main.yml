@@ -166,3 +166,6 @@
 
 - name: install texlive
   apt: name=texlive state=present
+
+- name: install texlive-lang-cjk
+  apt: name=texlive-lang-cjk state=present
