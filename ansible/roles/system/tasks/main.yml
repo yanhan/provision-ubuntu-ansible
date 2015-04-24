@@ -169,3 +169,6 @@
 
 - name: install texlive-lang-cjk
   apt: name=texlive-lang-cjk state=present
+
+- name: install texlive-xetex (xelatex)
+  apt: name=texlive-xetex state=present
