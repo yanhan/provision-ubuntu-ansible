@@ -1,7 +1,9 @@
 home_path: /home/philip
+repo_files_path: "{{ home_path }}/provision-linux/ansible/roles/system/files"
+
 dotfiles_repo_path: "{{home_path}}/dotfiles"
 vundle_repo_path: "{{home_path}}/.vim/bundle/Vundle.vim"
-password_file_path: "{{home_path}}/provision-linux/ansible/roles/system/files/password.txt"
-fonts_folder: "{{ home_path }}/provision-linux/ansible/roles/system/files/fonts/"
+password_file_path: "{{ repo_files_path }}/password.txt"
+fonts_folder: "{{ repo_files_path}}/fonts/"
 home_fonts_path: "{{ home_path }}/.fonts/"
 rsync_fonts_log_file_path: /tmp/pl-rsync-fonts-log-file
