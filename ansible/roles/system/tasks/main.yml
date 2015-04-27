@@ -164,6 +164,10 @@
 - name: install pepperflashplugin-nonfree
   apt: name=pepperflashplugin-nonfree state=present
 
+# we do this because we're gonna install TeXLive manually
+- name: remove tex-common
+  apt: name=tex-common state=absent
+
 - name: remove Chinese fonts installation log file
   shell: "rm -f {{ rsync_fonts_log_file_path }}"
 
