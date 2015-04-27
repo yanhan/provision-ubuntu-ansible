@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Based on http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373
+
+set -e
+
+cd /tmp
+rm -rf `tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D'`
+
+# input that the installer script takes in.
+# It is a single line with an `i` character to tell the script to proceed with
+# installation.
+cat << EOF >installer-input
+i
+EOF
+
+tar xzf install-tl-unx.tar.gz
+cd `tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D'`
+# run the installation script, with stdin from `/tmp/installer-input`
+./install-tl < ../installer-input
+ln -s /usr/local/texlive/2014/bin/* /opt/texbin
+
+# create directory for installing debian `texlive-local` fake package
+rm -rf /tmp/tl-equivs
+mkdir -v /tmp/tl-equivs

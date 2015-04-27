@@ -7,3 +7,8 @@ password_file_path: "{{ repo_files_path }}/password.txt"
 fonts_folder: "{{ repo_files_path}}/fonts/"
 home_fonts_path: "{{ home_path }}/.fonts/"
 rsync_fonts_log_file_path: /tmp/pl-rsync-fonts-log-file
+texlive_install_script_path: "{{ repo_files_path }}/install-texlive"
+texlive_unix_installer_gz: install-tl-unx.tar.gz
+texlive_unix_installer_gz_path: "{{ repo_files_path }}/{{ texlive_unix_installer_gz }}"
+texlive_equivs_file_path: "{{ repo_files_path }}/debian-equivs-2014-ex.txt"
+texlive_update_etc_environment_script_path: "{{ repo_files_path }}/texlive-update-etc-environment"

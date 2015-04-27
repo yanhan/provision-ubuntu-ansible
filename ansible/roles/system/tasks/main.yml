@@ -182,3 +182,34 @@
 - name: run `fc-cache -rv` when new fonts are installed
   shell: fc-cache -rv
   when: new_fonts_installed.rc == 0
+
+
+# Install TeXLive
+
+# Based on:
+# http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373
+
+# for texlive-local fake package
+- name: install equivs
+  apt: name=equivs state=present install_recommends=no
+
+- name: check if TexLive is installed
+  shell: dpkg -s texlive-local
+  ignore_errors: True
+  register: texlive_installed
+
+- name: copy TeXLive installer to /tmp
+  shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
+  when: texlive_installed.rc != 0
+
+- name: install TeXLive
+  shell: "{{ texlive_install_script_path }}"
+  when: texlive_installed.rc != 0
+
+- name: prepend TeXLive bin path to PATH env var in /etc/environment
+  shell: "{{ texlive_update_etc_environment_script_path }}"
+  when: texlive_installed.rc != 0
+
+- name: install fake TeXLive package
+  shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2014-1_all.deb"
+  when: texlive_installed.rc != 0

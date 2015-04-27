@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+
+# Updates the PATH environment variable in `/etc/environment` file by prepending
+# it with /opt/texbin
+
+ETC_ENV_PATH = "/etc/environment"
+TEXBIN_PATH = "/opt/texbin"
+
+def _prepend_texbin_to_line(line):
+    # Assumes that line starts with 'PATH="' and ends with '"\n'
+    ret_format_string = "PATH=\"{}\"\n"
+    new_line = line[:-2][6:]
+    if TEXBIN_PATH not in new_line.split(":"):
+        return ret_format_string.format("{}:{}".format(TEXBIN_PATH, new_line))
+    else:
+        return line
+
+def _main():
+    lines = []
+    with open(ETC_ENV_PATH, "r") as f:
+        for line in f:
+            if line.startswith("PATH=\""):
+                lines.append(_prepend_texbin_to_line(line))
+            else:
+                lines.append(line)
+    with open(ETC_ENV_PATH, "w") as f:
+        for line in lines:
+            f.write(line)
+
+if __name__ == "__main__":
+    _main()
