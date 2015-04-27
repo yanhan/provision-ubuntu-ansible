@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm /opt/texbin
+rm -rf /usr/local/texlive
+apt-get -y purge texlive-local

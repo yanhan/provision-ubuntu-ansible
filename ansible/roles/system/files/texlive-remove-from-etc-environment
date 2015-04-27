@@ -1,0 +1,27 @@
+#!/usr/bin/env python
+
+ETC_ENVIRONMENT = "/etc/environment"
+TEXBIN_PATH = "/opt/texbin"
+
+def _transform(line):
+    ret_format_string = "PATH=\"{}\"\n"
+    new_line = line[:-2][6:]
+    paths_without_texbin = list(
+        filter(lambda l: l != TEXBIN_PATH, new_line.split(":"))
+    )
+    return ret_format_string.format(":".join(paths_without_texbin))
+
+def _main():
+    lines = []
+    with open(ETC_ENVIRONMENT, "r") as f:
+        for line in f:
+            if line.startswith("PATH=\""):
+                lines.append(_transform(line))
+            else:
+                lines.append(line)
+    with open(ETC_ENVIRONMENT, "w") as f:
+        for line in lines:
+            f.write(line)
+
+if __name__ == "__main__":
+    _main()
