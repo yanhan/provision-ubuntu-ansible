@@ -164,15 +164,6 @@
 - name: install pepperflashplugin-nonfree
   apt: name=pepperflashplugin-nonfree state=present
 
-- name: install texlive
-  apt: name=texlive state=present
-
-- name: install texlive-lang-cjk
-  apt: name=texlive-lang-cjk state=present
-
-- name: install texlive-xetex (xelatex)
-  apt: name=texlive-xetex state=present
-
 - name: remove Chinese fonts installation log file
   shell: "rm -f {{ rsync_fonts_log_file_path }}"
 
