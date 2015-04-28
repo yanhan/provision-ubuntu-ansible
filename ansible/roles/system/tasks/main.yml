@@ -193,10 +193,14 @@
 - name: install equivs
   apt: name=equivs state=present install_recommends=no
 
-- name: check if TexLive is installed
+- name: check if TeXLive is installed
   shell: dpkg -s texlive-local
   ignore_errors: True
   register: texlive_installed
+
+- name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
+  shell: "{{ texlive_uninstall_script_path }}"
+  ignore_errors: True
 
 - name: copy TeXLive installer to /tmp
   shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
