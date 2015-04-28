@@ -201,6 +201,7 @@
 - name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
   shell: "{{ texlive_uninstall_script_path }}"
   ignore_errors: True
+  when: texlive_installed.rc != 0
 
 - name: copy TeXLive installer to /tmp
   shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
