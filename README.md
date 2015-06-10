@@ -11,16 +11,6 @@ account:
 
     https://help.github.com/articles/generating-ssh-keys/
 
-Then execute the following commands in the top level of this repository:
-
-    # Add the git-core ppa for a more modern version of git
-    sudo add-apt-repository ppa:git-core/ppa
-    sudo apt-get update
-    sudo apt-get install python-virtualenv python-dev
-    virtualenv venv
-    . venv/bin/activate
-    pip install -r requirements.txt
-
 ### Configuring the repository
 
 #### ansible/roles/system/vars/main.yml
@@ -53,7 +43,7 @@ the shell of the current user to zsh.
 
 ## Run
 
-    ansible-playbook -K -i ansible/inventory ansible/localhost.yml
+    ./run
 
 ## License
 
