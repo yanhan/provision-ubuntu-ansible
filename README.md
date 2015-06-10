@@ -54,3 +54,7 @@ the shell of the current user to zsh.
 ## Run
 
     ansible-playbook -K -i ansible/inventory ansible/localhost.yml
+
+## License
+
+MIT (http://opensource.org/licenses/MIT)
