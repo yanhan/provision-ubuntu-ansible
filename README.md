@@ -1,6 +1,6 @@
 # About
 
-Uses ansible to provision an Ubuntu based Linux system
+Provisions my Ubuntu Linux system using Ansible
 
 ## Setup
 
