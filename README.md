@@ -11,7 +11,7 @@ account:
 
     https://help.github.com/articles/generating-ssh-keys/
 
-Then execute the following commands:
+Then execute the following commands in the top level of this repository:
 
     # Add the git-core ppa for a more modern version of git
     sudo add-apt-repository ppa:git-core/ppa
