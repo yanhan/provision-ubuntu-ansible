@@ -1,0 +1,55 @@
+# Installs TeXLive
+
+
+# we do this because we're gonna install TeXLive manually
+- name: remove tex-common
+  apt: name=tex-common state=absent
+
+- name: remove Chinese fonts installation log file
+  shell: "rm -f {{ rsync_fonts_log_file_path }}"
+
+- name: install Chinese fonts
+  shell: "rsync -avz {{ fonts_folder }} {{ home_fonts_path }} --log-file={{ rsync_fonts_log_file_path }} --log-file-format='%f'"
+
+- name: check if any new fonts are installed
+  shell: "grep -q '\\.ttf$' {{ rsync_fonts_log_file_path }}"
+  ignore_errors: true
+  register: new_fonts_installed
+
+- name: run `fc-cache -rv` when new fonts are installed
+  shell: fc-cache -rv
+  when: new_fonts_installed.rc == 0
+
+
+# This section is based on:
+# http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu/95373#95373
+
+# for texlive-local fake package
+- name: install equivs
+  apt: name=equivs state=present install_recommends=no
+
+- name: check if TeXLive is installed
+  shell: dpkg -s texlive-local
+  ignore_errors: True
+  register: texlive_installed
+
+- name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
+  shell: "{{ texlive_uninstall_script_path }}"
+  ignore_errors: True
+  when: texlive_installed.rc != 0
+
+- name: copy TeXLive installer to /tmp
+  shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
+  when: texlive_installed.rc != 0
+
+- name: install TeXLive
+  shell: "{{ texlive_install_script_path }}"
+  when: texlive_installed.rc != 0
+
+- name: prepend TeXLive bin path to PATH env var in /etc/environment
+  shell: "{{ texlive_update_etc_environment_script_path }}"
+  when: texlive_installed.rc != 0
+
+- name: install fake TeXLive package
+  shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2014-1_all.deb"
+  when: texlive_installed.rc != 0
