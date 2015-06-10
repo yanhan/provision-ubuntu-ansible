@@ -13,3 +13,9 @@ texlive_unix_installer_gz_path: "{{ repo_files_path }}/{{ texlive_unix_installer
 texlive_equivs_file_path: "{{ repo_files_path }}/debian-equivs-2014-ex.txt"
 texlive_update_etc_environment_script_path: "{{ repo_files_path }}/texlive-update-etc-environment"
 texlive_uninstall_script_path: "{{ repo_files_path }}/uninstall-texlive"
+
+haskell_platform_targz_url: "https://www.haskell.org/platform/download/2014.2.0.0/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz"
+haskell_platform_targz_path: "/tmp/haskell-platform-2014.2.0.0-unknown-linux-x86_64.tar.gz"
+haskell_platform_targz_sha256sum: "0da6879ae657481849e7ec4e5d3c4c035e090824167f97434b48af297ec17cf9"
+haskell_platform_installation_root_folder: /usr/local/haskell/ghc-7.8.3-x86_64
+haskell_platform_activate_bin: "{{ haskell_platform_installation_root_folder }}/bin/activate-hs"

@@ -164,6 +164,8 @@
 - name: install pepperflashplugin-nonfree
   apt: name=pepperflashplugin-nonfree state=present
 
+- include: install-haskell-platform.yml
+
 # NOTE: This part should always be placed at the end of this file because there
 #       is a high chance of it failing due to network connection issues
 # Installs TexLive.
