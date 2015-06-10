@@ -11,6 +11,8 @@ account:
 
     https://help.github.com/articles/generating-ssh-keys/
 
+This is for cloning the [dotfiles](https://github.com/yanhan/dotfiles) repo.
+
 ### Configuring the repository
 
 #### ansible/roles/system/vars/main.yml
