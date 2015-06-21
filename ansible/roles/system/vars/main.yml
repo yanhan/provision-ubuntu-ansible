@@ -4,6 +4,7 @@ repo_files_path: "{{ home_path }}/provision-ubuntu/ansible/roles/system/files"
 dotfiles_repo_path: "{{home_path}}/dotfiles"
 vundle_repo_path: "{{home_path}}/.vim/bundle/Vundle.vim"
 password_file_path: "{{ repo_files_path }}/password.txt"
+update_etc_environment_path_path: "{{ repo_files_path }}/update-etc-environment-path"
 fonts_folder: "{{ repo_files_path}}/fonts/"
 home_fonts_path: "{{ home_path }}/.fonts/"
 rsync_fonts_log_file_path: /tmp/pl-rsync-fonts-log-file
@@ -19,3 +20,8 @@ haskell_platform_targz_path: "/tmp/haskell-platform-2014.2.0.0-unknown-linux-x86
 haskell_platform_targz_sha256sum: "0da6879ae657481849e7ec4e5d3c4c035e090824167f97434b48af297ec17cf9"
 haskell_platform_installation_root_folder: /usr/local/haskell/ghc-7.8.3-x86_64
 haskell_platform_activate_bin: "{{ haskell_platform_installation_root_folder }}/bin/activate-hs"
+
+golang_binary_targz_filename: "go1.4.2.linux-amd64.tar.gz"
+golang_binary_targz_url: "https://storage.googleapis.com/golang/{{ golang_binary_targz_filename }}"
+golang_binary_targz_fullpath: "/tmp/{{ golang_binary_targz_filename }}"
+golang_binary_targz_sha1sum_expected: "5020af94b52b65cc9b6f11d50a67e4bae07b0aff"
