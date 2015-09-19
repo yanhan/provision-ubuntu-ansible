@@ -7,8 +7,16 @@
 - name: add ffmpeg source ppa for installing ffmpeg
   apt_repository: repo='deb-src http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main' state=present update_cache=yes
 
-- name: apt-get update if last update was > 1 day ago
-  apt: update_cache=yes cache_valid_time=86400
+- name: check {{ apt_sources_list }} to see if sg mirror is used
+  shell: "cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
+  register: nr_lines_with_sg_mirror_in_apt_sources
+
+- name: replace {{ apt_sg_mirror }} mirrors with {{ apt_osuosl_mirror }} mirror
+  shell: perl -pi -e 's#^(deb|deb-src) {{ apt_sg_mirror }}#\1 {{ apt_osuosl_mirror }}#' /etc/apt/sources.list
+  when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0
+
+- name: Perform apt-get update if last update was > 1 day ago OR if we just replaced apt sg mirror
+  mylib_perform_apt_update: cache_valid_time=86400 nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
 
 - name: install vim
   apt: name=vim state=present
