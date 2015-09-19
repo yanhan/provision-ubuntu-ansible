@@ -139,6 +139,9 @@
 - name: install gimp
   apt: name=gimp state=present
 
+- name: install imagemagick
+  apt: name=imagemagick state=present
+
 - name: install virtualbox
   apt: name=virtualbox state=present
 
