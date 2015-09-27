@@ -120,6 +120,12 @@
 - name: install pwgen
   apt: name=pwgen state=present
 
+- name: install firefox
+  apt: name=firefox state=present
+
+- name: install icedtea-plugin
+  apt: name=icedtea-plugin state=present
+
 - name: install chromium-browser
   apt: name=chromium-browser state=present
 
