@@ -58,6 +58,17 @@
     - firefox
     - icedtea-plugin
     - chromium-browser
+    - scrot
+    - gimp
+    - imagemagick
+    - virtualbox
+    - virtualbox-guest-additions-iso
+    - virtualbox-guest-utils
+    - virtualbox-guest-x11
+    - ffmpeg
+    - gstreamer0.10-ffmpeg
+    - flashplugin-installer
+    - pepperflashplugin-nonfree
 
 - include: install_dotfiles.yml
 
@@ -72,17 +83,6 @@
   when: dropbox_installed.rc != 0
   sudo_user: philip
 
-- name: install more stuff
-  apt: name={{ item }} state=present
-  with_items:
-    - scrot
-    - gimp
-    - imagemagick
-    - virtualbox
-    - virtualbox-guest-additions-iso
-    - virtualbox-guest-utils
-    - virtualbox-guest-x11
-
 - name: check if vagrant is installed
   shell: sudo dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
   ignore_errors: true
@@ -91,14 +91,6 @@
 - name: install vagrant 1.7.2
   shell: wget 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb' -O /tmp/vagrant_1.7.2_x86_64.deb && sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
   when: vagrant_installed.rc != 0
-
-- name: install some more stuff
-  apt: name={{ item }} state=present
-  with_items:
-    - ffmpeg
-    - gstreamer0.10-ffmpeg
-    - flashplugin-installer
-    - pepperflashplugin-nonfree
 
 - include: install-haskell-platform.yml
 
