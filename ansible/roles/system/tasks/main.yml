@@ -18,116 +18,46 @@
 - name: Perform apt-get update if last update was > 1 day ago OR if we just replaced apt sg mirror
   mylib_perform_apt_update: cache_valid_time=86400 nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
 
-- name: install vim
-  apt: name=vim state=present
-
-- name: install screen
-  apt: name=screen state=present
-
-- name: install tmux
-  apt: name=tmux state=present
-
-- name: install zsh
-  apt: name=zsh state=present
-
-- name: install gcc
-  apt: name=gcc state=present
-
-- name: install g++
-  apt: name=g++ state=present
-
-- name: install make
-  apt: name=make state=present
-
-- name: install openjdk-7-jdk
-  apt: name=openjdk-7-jdk state=present
-
-- name: install gdb
-  apt: name=gdb state=present
-
-- name: install curl
-  apt: name=curl state=present
-
-- name: install expat
-  apt: name=expat state=present
-
-- name: install tcl8.6
-  apt: name=tcl8.6 state=present
-
-- name: install tcl8.6-dev
-  apt: name=tcl8.6-dev state=present
-
-- name: install tk8.6
-  apt: name=tk8.6 state=present
-
-- name: install tk8.6-dev
-  apt: name=tk8.6-dev state=present
-
-- name: install zlib1g-dev
-  apt: name=zlib1g-dev state=present
-
-- name: install lzma-dev
-  apt: name=lzma-dev state=present
-
-- name: install liblzma-dev
-  apt: name=liblzma-dev state=present
-
-- name: install libcurl4-openssl-dev
-  apt: name=libcurl4-openssl-dev state=present
-
-- name: install libssl-dev
-  apt: name=libssl-dev state=present
-
-- name: install libbz2-dev
-  apt: name=libbz2-dev state=present
-
-- name: install libexpat1-dev
-  apt: name=libexpat1-dev state=present
-
-- name: install libsqlite3-dev
-  apt: name=libsqlite3-dev state=present
-
-- name: install libncurses5-dev
-  apt: name=libncurses5-dev state=present
-
-- name: install libpcre3
-  apt: name=libpcre3 state=present
-
-- name: install libpcre3-dev
-  apt: name=libpcre3-dev state=present
-
-- name: install libgmp-dev
-  apt: name=libgmp-dev state=present
-
-- name: install unzip
-  apt: name=unzip state=present
-
-- name: install xsel
-  apt: name=xsel state=present
-
-- name: install git
-  apt: name=git state=present
-
-- name: install sqlite3
-  apt: name=sqlite3 state=present
-
-- name: install r-base
-  apt: name=r-base state=present
-
-- name: install r-base-core
-  apt: name=r-base-core state=present
-
-- name: install pwgen
-  apt: name=pwgen state=present
-
-- name: install firefox
-  apt: name=firefox state=present
-
-- name: install icedtea-plugin
-  apt: name=icedtea-plugin state=present
-
-- name: install chromium-browser
-  apt: name=chromium-browser state=present
+- name: install some packages
+  apt: name={{ item }} state=present
+  with_items:
+    - vim
+    - screen
+    - tmux
+    - zsh
+    - gcc
+    - g++
+    - make
+    - openjdk-7-jdk
+    - gdb
+    - curl
+    - expat
+    - tcl8.6
+    - tcl8.6-dev
+    - tk8.6
+    - tk8.6-dev
+    - zlib1g-dev
+    - lzma-dev
+    - liblzma-dev
+    - libcurl4-openssl-dev
+    - libssl-dev
+    - libbz2-dev
+    - libexpat1-dev
+    - libsqlite3-dev
+    - libncurses5-dev
+    - libpcre3
+    - libpcre3-dev
+    - libgmp-dev
+    - unzip
+    - xsel
+    - git
+    - sqlite3
+    - r-base
+    - r-base-core
+    - pwgen
+    - firefox
+    - icedtea-plugin
+    - chromium-browser
 
 - include: install_dotfiles.yml
 
@@ -142,26 +72,16 @@
   when: dropbox_installed.rc != 0
   sudo_user: philip
 
-- name: install scrot
-  apt: name=scrot state=present
-
-- name: install gimp
-  apt: name=gimp state=present
-
-- name: install imagemagick
-  apt: name=imagemagick state=present
-
-- name: install virtualbox
-  apt: name=virtualbox state=present
-
-- name: install virtualbox-guest-additions-iso
-  apt: name=virtualbox-guest-additions-iso state=present
-
-- name: install virtualbox-guest-utils
-  apt: name=virtualbox-guest-utils state=present
-
-- name: install virtualbox-guest-x11
-  apt: name=virtualbox-guest-x11 state=present
+- name: install more stuff
+  apt: name={{ item }} state=present
+  with_items:
+    - scrot
+    - gimp
+    - imagemagick
+    - virtualbox
+    - virtualbox-guest-additions-iso
+    - virtualbox-guest-utils
+    - virtualbox-guest-x11
 
 - name: check if vagrant is installed
   shell: sudo dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
@@ -172,17 +92,13 @@
   shell: wget 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb' -O /tmp/vagrant_1.7.2_x86_64.deb && sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
   when: vagrant_installed.rc != 0
 
-- name: install ffmpeg
-  apt: name=ffmpeg state=present
-
-- name: install gstreamer0.10-ffmpeg
-  apt: name=gstreamer0.10-ffmpeg state=present
-
-- name: install flashplugin-installer
-  apt: name=flashplugin-installer state=present
-
-- name: install pepperflashplugin-nonfree
-  apt: name=pepperflashplugin-nonfree state=present
+- name: install some more stuff
+  apt: name={{ item }} state=present
+  with_items:
+    - ffmpeg
+    - gstreamer0.10-ffmpeg
+    - flashplugin-installer
+    - pepperflashplugin-nonfree
 
 - include: install-haskell-platform.yml
 
