@@ -1,14 +1,7 @@
 - name: Download Golang Binary Distribution
-  shell: "wget {{ golang_binary_targz_url }} -O {{ golang_binary_targz_fullpath }}"
-
-- name: Compute SHA1sum of Golang Binary Distribution
-  shell: "shasum -a 1 {{ golang_binary_targz_fullpath }}"
-  register: golang_binary_targz_sha1sum_actual
-
-- name: Ensure that SHA1sum of Golang Binary Distribution is correct
-  assert:
-    that:
-      "golang_binary_targz_sha1sum_actual.stdout.split()[0] == \"{{ golang_binary_targz_sha1sum_expected }}\""
+  get_url: url={{ golang_binary_targz_url }}
+           dest={{ golang_binary_targz_fullpath }}
+           sha256sum={{ golang_binary_targz_sha256sum }}
 
 - name: install Go
   shell: "tar -C /usr/local -xzf {{ golang_binary_targz_fullpath }}"
