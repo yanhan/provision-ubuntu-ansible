@@ -4,18 +4,10 @@
   ignore_errors: True
 
 - name: Download Haskell Platform binaries
-  shell: wget "{{ haskell_platform_targz_url }}" -O "{{ haskell_platform_targz_path }}"
-  when: haskell_platform_installed.rc != 0
-
-- name: Get SHA256 checksum of downloaded Haskell Platform binaries
-  shell: sha256sum "{{ haskell_platform_targz_path }}"
-  register: rt__haskell_platform_targz_sha256sum
-  when: haskell_platform_installed.rc != 0
-
-- name: Ensure integrity of downloaded Haskell Platform binaries
-  assert: 
-    that:
-      - "\"{{ haskell_platform_targz_sha256sum }}\" == rt__haskell_platform_targz_sha256sum.stdout.split()[0]"
+  get_url: url={{ haskell_platform_targz_url }}
+           dest={{ haskell_platform_targz_path }}
+           sha256sum={{ haskell_platform_targz_sha256sum }}
+           timeout=30
   when: haskell_platform_installed.rc != 0
 
 - name: Extract Haskell Platform to /usr/local
