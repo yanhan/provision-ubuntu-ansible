@@ -83,7 +83,7 @@
   shell: apt-get -y build-dep matplotlib
   sudo: True
 
-- include: install_dotfiles.yml
+- include: install-dotfiles.yml
 
 - name: check if dropbox is installed
   shell: test -f ~/.dropbox-dist/dropboxd
