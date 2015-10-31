@@ -2,33 +2,6 @@
 
 set -e
 
-# Checks if an array contains a given element
-# arg 1: the element to search for
-# arg 2: the array to search
-containsElement() {
-  local e
-  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
-  return 1
-}
-
-# Get a list of PPAs
-PPA_ARRAY=()
-
-for APT_LIST in `find /etc/apt/ -name \*.list`; do
-  while read ENTRY; do
-    USER=`echo $ENTRY | cut -d/ -f4`
-    PPA=`echo $ENTRY | cut -d/ -f5`
-    PPA_ARRAY+=("$USER/$PPA")
-  done < <(grep -o '^deb http://ppa.launchpad.net/[a-z0-9\-]\+/[a-z0-9\-]\+' $APT_LIST)
-done
-
-# Add `git-core/ppa` for a more modern version of git, if it's not present
-if ! containsElement "git-core/ppa" "${PPA_ARRAY[@]}"
-then
-  sudo add-apt-repository ppa:git-core/ppa
-  sudo apt-get update
-fi
-
 if ! dpkg -s python-virtualenv
 then
   sudo apt-get -y install python-virtualenv

@@ -1,3 +1,20 @@
+- name: import GPG key for git ppa
+  apt_key: keyserver=keyserver.ubuntu.com
+           id=E1DD270288B4E6030699E45FA1715D88E1DF1F24
+           state=present
+
+- name: add `deb` ppa for installing git
+  apt_repository: repo="deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main"
+                  state=present
+                  update_cache=yes
+  sudo: yes
+
+- name: add `deb-src` ppa for installing git
+  apt_repository: repo="deb-src http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main "
+                  state=present
+                  update_cache=yes
+  sudo: yes
+
 - name: import GPG key for ffmpeg ppa
   apt_key: keyserver=keyserver.ubuntu.com
            id=8E51A6D660CD88D67D65221D90BD7EACED8E640A
