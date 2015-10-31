@@ -79,6 +79,10 @@
     - zlib1g-dev
     - zsh
 
+- name: Install build dependencies for matplotlib
+  shell: apt-get -y build-dep matplotlib
+  sudo: True
+
 - include: install_dotfiles.yml
 
 - name: check if dropbox is installed
@@ -108,10 +112,6 @@
 
 - include: install-golang.yml
   when: go_installed.rc != 0
-
-- name: Install build dependencies for matplotlib
-  shell: apt-get -y build-dep matplotlib
-  sudo: True
 
 # NOTE: This part should always be placed at the end of this file because there
 #       is a high chance of it failing due to network connection issues
