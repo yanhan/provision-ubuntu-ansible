@@ -30,54 +30,54 @@
   apt: name={{ item }}
        state=present
   with_items:
-    - vim
-    - screen
-    - tmux
-    - zsh
-    - gcc
-    - g++
-    - make
-    - openjdk-7-jdk
-    - gdb
+    - chromium-browser
     - curl
     - expat
+    - ffmpeg
+    - firefox
+    - flashplugin-installer
+    - g++
+    - gcc
+    - gdb
+    - gimp
+    - git
+    - gstreamer0.10-ffmpeg
+    - icedtea-plugin
+    - imagemagick
+    - libbz2-dev
+    - libcurl4-openssl-dev
+    - libexpat1-dev
+    - libgmp-dev
+    - liblzma-dev
+    - libncurses5-dev
+    - libpcre3
+    - libpcre3-dev
+    - libsqlite3-dev
+    - libssl-dev
+    - lzma-dev
+    - make
+    - openjdk-7-jdk
+    - pepperflashplugin-nonfree
+    - pwgen
+    - r-base
+    - r-base-core
+    - screen
+    - scrot
+    - sqlite3
     - tcl8.6
     - tcl8.6-dev
     - tk8.6
     - tk8.6-dev
-    - zlib1g-dev
-    - lzma-dev
-    - liblzma-dev
-    - libcurl4-openssl-dev
-    - libssl-dev
-    - libbz2-dev
-    - libexpat1-dev
-    - libsqlite3-dev
-    - libncurses5-dev
-    - libpcre3
-    - libpcre3-dev
-    - libgmp-dev
+    - tmux
     - unzip
-    - xsel
-    - git
-    - sqlite3
-    - r-base
-    - r-base-core
-    - pwgen
-    - firefox
-    - icedtea-plugin
-    - chromium-browser
-    - scrot
-    - gimp
-    - imagemagick
+    - vim
     - virtualbox
     - virtualbox-guest-additions-iso
     - virtualbox-guest-utils
     - virtualbox-guest-x11
-    - ffmpeg
-    - gstreamer0.10-ffmpeg
-    - flashplugin-installer
-    - pepperflashplugin-nonfree
+    - xsel
+    - zlib1g-dev
+    - zsh
 
 - include: install_dotfiles.yml
 
