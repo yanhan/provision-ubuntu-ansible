@@ -3,7 +3,8 @@
 
 # we do this because we're gonna install TeXLive manually
 - name: remove tex-common
-  apt: name=tex-common state=absent
+  apt: name=tex-common
+       state=absent
 
 - name: remove Chinese fonts installation log file
   shell: "rm -f {{ rsync_fonts_log_file_path }}"
@@ -26,7 +27,9 @@
 
 # for texlive-local fake package
 - name: install equivs
-  apt: name=equivs state=present install_recommends=no
+  apt: name=equivs
+       state=present
+       install_recommends=no
 
 - name: check if TeXLive is installed
   shell: dpkg -s texlive-local

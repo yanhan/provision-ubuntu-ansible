@@ -1,11 +1,17 @@
 - name: import GPG key for ffmpeg ppa
-  apt_key: keyserver=keyserver.ubuntu.com id=8E51A6D660CD88D67D65221D90BD7EACED8E640A state=present
+  apt_key: keyserver=keyserver.ubuntu.com
+           id=8E51A6D660CD88D67D65221D90BD7EACED8E640A
+           state=present
 
 - name: add ffmpeg ppa for installing ffmpeg
-  apt_repository: repo='deb http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main' state=present update_cache=yes
+  apt_repository: repo='deb http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main'
+                  state=present
+                  update_cache=yes
 
 - name: add ffmpeg source ppa for installing ffmpeg
-  apt_repository: repo='deb-src http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main' state=present update_cache=yes
+  apt_repository: repo='deb-src http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main'
+                  state=present
+                  update_cache=yes
 
 - name: check {{ apt_sources_list }} to see if sg mirror is used
   shell: "cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
@@ -16,11 +22,13 @@
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0
 
 - name: Perform apt-get update if last update was > 1 day ago OR if we just replaced apt sg mirror
-  mylib_perform_apt_update: cache_valid_time=86400 nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
+  mylib_perform_apt_update: cache_valid_time=86400
+                            nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
   sudo: yes
 
 - name: install some packages
-  apt: name={{ item }} state=present
+  apt: name={{ item }}
+       state=present
   with_items:
     - vim
     - screen

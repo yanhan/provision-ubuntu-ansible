@@ -1,7 +1,7 @@
 - name: check if oh my zsh is installed
   shell: test -d .oh-my-zsh
   args:
-    chdir: "{{home_path}}"
+    chdir: "{{ home_path }}"
   register: oh_my_zsh_installed
   ignore_errors: true
 
@@ -12,7 +12,7 @@
   when: oh_my_zsh_installed.rc != 0
 
 - name: change to use zsh shell
-  shell: cat "{{password_file_path}}" | chsh -s $(which zsh) philip
+  shell: cat "{{ password_file_path }}" | chsh -s $(which zsh) philip
   when: oh_my_zsh_installed.rc != 0
   sudo: yes
 
@@ -40,18 +40,18 @@
 - name: dotfiles repo - change remote origin
   shell: git remote rm origin && git remote add origin git@github.com:yanhan/dotfiles.git
   args:
-    chdir: "{{dotfiles_repo_path}}"
+    chdir: "{{ dotfiles_repo_path }}"
   when: dotfiles_git_repo_exists.rc != 0 and dotfiles_origin_check.rc != 0
 
 - name: setup dotfiles repository
   shell: python setup_home_folder_dotfiles.py gitconfig tmux.conf vimrc zshrc
   args:
-    chdir: "{{dotfiles_repo_path}}"
+    chdir: "{{ dotfiles_repo_path }}"
   when: dotfiles_git_repo_exists.rc != 0
 
 - name: ensure Vundle git repository exists
   git: repo=https://github.com/gmarik/Vundle.vim.git
-       dest="{{vundle_repo_path}}"
+       dest="{{ vundle_repo_path }}"
        version=v0.10.2
   register: vundle_git_repo
 
