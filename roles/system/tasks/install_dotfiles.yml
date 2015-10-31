@@ -4,32 +4,29 @@
     chdir: "{{home_path}}"
   register: oh_my_zsh_installed
   ignore_errors: true
-  sudo_user: philip
 
 - name: clone oh my zsh repository
   shell: >
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&
       cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
   when: oh_my_zsh_installed.rc != 0
-  sudo_user: philip
 
 - name: change to use zsh shell
   shell: cat "{{password_file_path}}" | chsh -s $(which zsh) philip
   when: oh_my_zsh_installed.rc != 0
+  sudo: yes
 
 - name: check if dotfiles git repository exists
   shell: test -d dotfiles
   args:
     chdir: "{{ home_path }}"
   ignore_errors: true
-  sudo_user: philip
   register: dotfiles_git_repo_exists
 
 - name: clone dotfiles git repository if it does not exist
   shell: git clone https://github.com/yanhan/dotfiles.git
   args:
     chdir: "{{ home_path }}"
-  sudo_user: philip
   when: dotfiles_git_repo_exists.rc != 0
 
 - name: dotfiles repo - check git remote origin is in git protocol
@@ -51,16 +48,13 @@
   args:
     chdir: "{{dotfiles_repo_path}}"
   when: dotfiles_git_repo_exists.rc != 0
-  sudo_user: philip
 
 - name: ensure Vundle git repository exists
   git: repo=https://github.com/gmarik/Vundle.vim.git
        dest="{{vundle_repo_path}}"
        version=v0.10.2
   register: vundle_git_repo
-  sudo_user: philip
 
 - name: install Vim plugins
   shell: yes | vim +PluginInstall +qall
   when: vundle_git_repo.changed
-  sudo_user: philip
