@@ -1,0 +1,45 @@
+# About
+# =====
+# Used to add a PPA
+#
+#
+# Arguments
+# =========
+# - name           : name of the software
+# + keyserver      : GPG keyserver to retrieve the GPG key of the PPA
+# + key_fingerprint: Fingerprint of the GPG key
+# + deb_ppa        : URL of the PPA for the `deb`. For example, if on the PPA
+#                    site, you are told to add the following line into your
+#                    system's software sources:
+#
+#                        deb http://ppa.launchpad.net/git-core/ppa/ubuntu YOUR_UBUNTU_VERSION_HERE main
+#
+#                    then `http://ppa.launchpad.net/git-core/ppa/ubuntu` should
+#                    be supplied to this `deb_pp` argument
+#
+# + deb_src_ppa    : URL of the PPA for the `deb-src`. Refer to the
+#                    documentation for `deb_ppa` to see what it means. The only
+#                    is that you should be using the URL which is prefixed by
+#                    `deb-src` instead of `deb`.
+#
+#
+# Free variables (defined outside this)
+# ====================================
+# + ubuntu_version: something like 'trusty', 'precise', etc. In other words,
+#                   the code name for the Ubuntu version you're using.
+- name: import GPG key for {{ name }} ppa
+  apt_key: keyserver={{ keyserver }}
+           id={{ key_fingerprint }}
+           state=present
+
+- name: add `deb` ppa for installing {{ name }}
+  apt_repository: repo="deb {{ deb_ppa }} {{ ubuntu_version }} main"
+                  state=present
+                  update_cache=yes
+  sudo: yes
+
+- name: add `deb-src` ppa for installing {{ name }}
+  apt_repository: repo="deb-src {{ deb_src_ppa }} {{ ubuntu_version }} main"
+                  state=present
+                  update_cache=yes
+  sudo: yes

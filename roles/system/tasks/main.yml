@@ -1,34 +1,18 @@
-- name: import GPG key for git ppa
-  apt_key: keyserver=keyserver.ubuntu.com
-           id=E1DD270288B4E6030699E45FA1715D88E1DF1F24
-           state=present
+- name: Add git ppa
+  include: ../../../playbook-includes/add-ppa.yml
+           name=git
+           keyserver=keyserver.ubuntu.com
+           key_fingerprint=E1DD270288B4E6030699E45FA1715D88E1DF1F24
+           deb_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
+           deb_src_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
 
-- name: add `deb` ppa for installing git
-  apt_repository: repo="deb http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main"
-                  state=present
-                  update_cache=yes
-  sudo: yes
-
-- name: add `deb-src` ppa for installing git
-  apt_repository: repo="deb-src http://ppa.launchpad.net/git-core/ppa/ubuntu trusty main "
-                  state=present
-                  update_cache=yes
-  sudo: yes
-
-- name: import GPG key for ffmpeg ppa
-  apt_key: keyserver=keyserver.ubuntu.com
-           id=8E51A6D660CD88D67D65221D90BD7EACED8E640A
-           state=present
-
-- name: add ffmpeg ppa for installing ffmpeg
-  apt_repository: repo='deb http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main'
-                  state=present
-                  update_cache=yes
-
-- name: add ffmpeg source ppa for installing ffmpeg
-  apt_repository: repo='deb-src http://ppa.launchpad.net/mc3man/trusty-media/ubuntu trusty main'
-                  state=present
-                  update_cache=yes
+- name: Add ffmpeg ppa
+  include: ../../../playbook-includes/add-ppa.yml
+           name=ffmpeg
+           keyserver=keyserver.ubuntu.com
+           key_fingerprint=8E51A6D660CD88D67D65221D90BD7EACED8E640A
+           deb_ppa=http://ppa.launchpad.net/mc3man/trusty-media/ubuntu
+           deb_src_ppa=http://ppa.launchpad.net/mc3man/trusty-media/ubuntu
 
 - name: check {{ apt_sources_list }} to see if sg mirror is used
   shell: "cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
