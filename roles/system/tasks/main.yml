@@ -79,6 +79,7 @@
     - xsel
     - zlib1g-dev
     - zsh
+  sudo: yes
 
 - name: Ensure that flashplugin-installer is always at the latest version
   apt: name=flashplugin-installer
