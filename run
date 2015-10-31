@@ -47,4 +47,4 @@ fi
 
 . venv/bin/activate
 pip install -r requirements.txt
-ansible-playbook -K -i ansible/inventory ansible/localhost.yml
+ansible-playbook -v -K -i inventory localhost.yml
