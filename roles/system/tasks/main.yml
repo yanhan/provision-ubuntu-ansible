@@ -80,6 +80,11 @@
     - zlib1g-dev
     - zsh
 
+- name: Ensure that flashplugin-installer is always at the latest version
+  apt: name=flashplugin-installer
+       state=latest
+  sudo: yes
+
 - name: Install build dependencies for matplotlib
   shell: apt-get -y build-dep matplotlib
   sudo: True
