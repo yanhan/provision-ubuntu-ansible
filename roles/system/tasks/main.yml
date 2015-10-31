@@ -17,6 +17,7 @@
 
 - name: Perform apt-get update if last update was > 1 day ago OR if we just replaced apt sg mirror
   mylib_perform_apt_update: cache_valid_time=86400 nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
+  sudo: yes
 
 - name: install some packages
   apt: name={{ item }} state=present
@@ -76,15 +77,13 @@
   shell: test -f ~/.dropbox-dist/dropboxd
   ignore_errors: true
   register: dropbox_installed
-  sudo_user: philip
 
 - name: install dropbox
   shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   when: dropbox_installed.rc != 0
-  sudo_user: philip
 
 - name: check if vagrant is installed
-  shell: sudo dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
+  shell: dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
   ignore_errors: true
   register: vagrant_installed
 
