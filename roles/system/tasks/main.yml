@@ -23,8 +23,14 @@
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0
 
 - name: Perform apt-get update if last update was > 1 day ago OR if we just replaced apt sg mirror
-  mylib_perform_apt_update: cache_valid_time=86400
-                            nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
+  check_if_need_to_apt_get_update: cache_valid_time=86400
+                                   nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
+  register: ag_update
+  sudo: yes
+
+- name: apt-get update
+  apt: update_cache="yes"
+  when: ag_update.need_to_update
   sudo: yes
 
 - name: install some packages
