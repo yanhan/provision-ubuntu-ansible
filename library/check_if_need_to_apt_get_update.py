@@ -7,7 +7,7 @@ module: check_if_need_to_apt_get_update
 short_description: Checks if an `apt-get update` should be performed
 description:
     - Performs `apt-get update` when the Singapore Ubuntu mirror has been
-      replaced or when the last successful `apt-get update` was performed
+      replaced or when the last successful `apt-get update` was performed >=
       `cache_time_valid` seconds ago
 author: "Pang Yan Han, Philip (@yanhan_pang)"
 notes: []
@@ -16,11 +16,10 @@ requirements:
 options:
     cache_valid_time:
         description:
-            - Minimum number of seconds between last `apt-get update` and the
-              current time that must be passed for us to perform an
-              `apt-get update` if the `nr_lines_with_sg_mirror_in_apt_sources`
-              option is less than or equal to 0 (meaning that the Singapore
-              Ubuntu mirror has been replaced)
+            - If at least `cache_valid_time` seconds has passed between the time
+              of invocation of this Ansible module and the previous
+              `apt-get update`, then the `need_to_update` field of the return
+              value will be set to `True`.
         required: False
         default: 0
 
@@ -28,8 +27,8 @@ options:
         description:
             - Number of lines in /etc/apt/sources.list where the
               http://sg.archive.ubuntu.com mirror is used. If this is greater
-              than 0, an `apt-get update` will be performed regardless of the
-              value of `cache_valid_time`
+              than 0, then the `need_to_update` field of the return value will
+              bet set to `True`.
         required: False
         default: 0
 """
