@@ -19,7 +19,10 @@ options:
             - If at least `cache_valid_time` seconds has passed between the time
               of invocation of this Ansible module and the previous
               `apt-get update`, then the `need_to_update` field of the return
-              value will be set to `True`.
+              value will be set to `True`. The time of the previous
+              `apt-get update` is obtained from the last modify time of the
+              `/var/cache/apt/pkgcache.bin` file, as suggested by
+              http://askubuntu.com/a/410259
         required: False
         default: 0
 
