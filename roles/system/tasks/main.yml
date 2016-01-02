@@ -66,6 +66,7 @@
     - openjdk-7-jdk
     - pepperflashplugin-nonfree
     - pwgen
+    - pv
     - r-base
     - r-base-core
     - screen
