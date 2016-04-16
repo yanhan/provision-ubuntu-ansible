@@ -63,6 +63,10 @@
     - libbz2-dev
     - libcurl4-openssl-dev
     - libexpat1-dev
+    # Required for R's `rgl` package, which is a dependency for the
+    # `igraph` package
+    - libgl1-mesa-dev
+    - libglu1-mesa-dev
     - libgmp-dev
     - liblzma-dev
     - libncurses5-dev
