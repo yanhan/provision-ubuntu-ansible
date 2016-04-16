@@ -6,6 +6,14 @@
            deb_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
            deb_src_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
 
+- name: Add R ppa
+  include: ../../../playbook-includes/add-ppa.yml
+           name=R
+           keyserver=keyserver.ubuntu.com
+           key_fingerprint="C9A7585B49D51698710F3A115E25F516B04C661B"
+           deb_ppa="http://ppa.launchpad.net/marutter/rrutter/ubuntu"
+           deb_src_ppa="http://ppa.launchpad.net/marutter/rrutter/ubuntu"
+
 #- name: Add ffmpeg ppa
 #  include: ../../../playbook-includes/add-ppa.yml
 #           name=ffmpeg
