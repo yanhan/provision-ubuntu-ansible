@@ -68,6 +68,8 @@
     - libncurses5-dev
     - libpcre3
     - libpcre3-dev
+    # Required for R's `Rpoppler` package
+    - libpoppler-glib-dev
     - libsqlite3-dev
     - libssl-dev
     # Required for R's `XML` package
