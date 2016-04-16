@@ -31,6 +31,7 @@
   apt_key: keyserver={{ keyserver }}
            id={{ key_fingerprint }}
            state=present
+  sudo: yes
 
 - name: add `deb` ppa for installing {{ name }}
   apt_repository: repo="deb {{ deb_ppa }} {{ ubuntu_version }} main"
