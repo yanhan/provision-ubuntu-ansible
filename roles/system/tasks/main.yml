@@ -47,6 +47,8 @@
   with_items:
     - chromium-browser
     - curl
+    # get metadata of image files
+    - exiftool
     - expat
     - ffmpeg
     - firefox
