@@ -1,0 +1,24 @@
+- name: Check if Stack is installed
+  shell: command -v stack >/dev/null 2>&1
+  ignore_errors: True
+  register: check_if_stack_is_installed
+
+- name: Add PPA for Stack
+  include: "../../../playbook-includes/add-ppa.yml"
+  vars:
+    name: "stack"
+    keyserver: "keyserver.ubuntu.com"
+    key_fingerprint: "575159689BEFB442"
+    deb_ppa: "http://download.fpcomplete.com/ubuntu"
+  when: check_if_stack_is_installed.rc != 0
+
+- name: sudo apt-get update
+  shell: "apt-get update"
+  become: yes
+  when: check_if_stack_is_installed.rc != 0
+
+- name: install Stack
+  apt:
+    name: "stack"
+    state: "present"
+  when: check_if_stack_is_installed.rc != 0
