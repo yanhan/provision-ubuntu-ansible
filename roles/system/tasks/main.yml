@@ -34,12 +34,12 @@
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
   register: ag_update
-  sudo: yes
+  become: yes
 
 - name: apt-get update
   apt: update_cache="yes"
   when: ag_update.need_to_update
-  sudo: yes
+  become: yes
 
 - name: install some packages
   apt: name={{ item }}
@@ -107,16 +107,16 @@
     - xsel
     - zlib1g-dev
     - zsh
-  sudo: yes
+  become: yes
 
 - name: Ensure that flashplugin-installer is always at the latest version
   apt: name=flashplugin-installer
        state=latest
-  sudo: yes
+  become: yes
 
 - name: Install build dependencies for matplotlib
   shell: apt-get -y build-dep matplotlib
-  sudo: yes
+  become: yes
 
 - include: install-dotfiles.yml
 

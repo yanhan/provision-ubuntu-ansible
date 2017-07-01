@@ -14,7 +14,7 @@
 - name: change to use zsh shell
   shell: cat "{{ password_file_path }}" | chsh -s $(which zsh) philip
   when: oh_my_zsh_installed.rc != 0
-  sudo: yes
+  become: yes
 
 - name: check if dotfiles git repository exists
   shell: test -d dotfiles

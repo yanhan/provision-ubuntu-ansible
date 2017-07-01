@@ -31,16 +31,16 @@
   apt_key: keyserver={{ keyserver }}
            id={{ key_fingerprint }}
            state=present
-  sudo: yes
+  become: yes
 
 - name: add `deb` ppa for installing {{ name }}
   apt_repository: repo="deb {{ deb_ppa }} {{ ubuntu_version }} main"
                   state=present
                   update_cache=yes
-  sudo: yes
+  become: yes
 
 - name: add `deb-src` ppa for installing {{ name }}
   apt_repository: repo="deb-src {{ deb_src_ppa }} {{ ubuntu_version }} main"
                   state=present
                   update_cache=yes
-  sudo: yes
+  become: yes

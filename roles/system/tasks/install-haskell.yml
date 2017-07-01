@@ -12,7 +12,7 @@
     deb_ppa: "http://download.fpcomplete.com/ubuntu"
   when: check_if_stack_is_installed.rc != 0
 
-- name: sudo apt-get update
+- name: apt-get update
   shell: "apt-get update"
   become: yes
   when: check_if_stack_is_installed.rc != 0
