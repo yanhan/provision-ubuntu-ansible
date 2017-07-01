@@ -129,6 +129,9 @@
   shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   when: dropbox_installed.rc != 0
 
+- name: Install powerline fonts
+  include: install-powerline-fonts.yml
+
 - name: Install Haskell
   include: install-haskell.yml
 
