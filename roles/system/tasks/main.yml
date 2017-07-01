@@ -129,15 +129,6 @@
   shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   when: dropbox_installed.rc != 0
 
-- name: check if vagrant is installed
-  shell: dpkg-query -W -f'${Status}\n' vagrant | grep '^install'
-  ignore_errors: true
-  register: vagrant_installed
-
-- name: install vagrant 1.7.2
-  shell: wget 'https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2_x86_64.deb' -O /tmp/vagrant_1.7.2_x86_64.deb && sudo dpkg -i /tmp/vagrant_1.7.2_x86_64.deb
-  when: vagrant_installed.rc != 0
-
 - include: install-haskell-platform.yml
 
 # NOTE: This part should always be placed at the end of this file because there
