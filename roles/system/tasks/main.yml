@@ -140,14 +140,6 @@
 
 - include: install-haskell-platform.yml
 
-- name: check if Golang has been installed
-  shell: command -v go >/dev/null 2>&1
-  register: go_installed
-  ignore_errors: True
-
-- include: install-golang.yml
-  when: go_installed.rc != 0
-
 # NOTE: This part should always be placed at the end of this file because there
 #       is a high chance of it failing due to network connection issues
 # Installs TexLive.
