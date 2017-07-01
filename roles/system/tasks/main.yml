@@ -135,6 +135,9 @@
 - name: Install Haskell
   include: install-haskell.yml
 
+- name: Install zsh-git-prompt
+  include: install-zsh-git-prompt.yml
+
 # NOTE: This part should always be placed at the end of this file because there
 #       is a high chance of it failing due to network connection issues
 # Installs TexLive.

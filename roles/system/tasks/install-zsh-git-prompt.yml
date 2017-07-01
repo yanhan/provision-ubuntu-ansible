@@ -1,0 +1,26 @@
+---
+- name: Check if the zsh-git-prompt repo exists
+  shell: "test -d ~/zsh-git-prompt"
+  ignore_errors: True
+  register: check_if_zsh_git_prompt_repo_exists
+
+- name: Clone the zsh-git-prompt repo
+  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt"
+  args:
+    chdir: "~"
+  when: check_if_zsh_git_prompt_repo_exists.rc != 0
+
+- name: Use stack to install the haskell compiler to this repo
+  shell: "stack setup"
+  args:
+    chdir: "~/zsh-git-prompt"
+
+- name: Build the zsh-git-prompt binary
+  shell: "stack build"
+  args:
+    chdir: "~/zsh-git-prompt"
+
+- name: Install the zsh-git-prompt binary
+  shell: "stack install"
+  args:
+    chdir: "~/zsh-git-prompt"
