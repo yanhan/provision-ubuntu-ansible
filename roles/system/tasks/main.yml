@@ -104,6 +104,7 @@
     - virtualbox-guest-additions-iso
     - virtualbox-guest-utils
     - virtualbox-guest-x11
+    - xclip
     - xsel
     - zlib1g-dev
     - zsh
