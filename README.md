@@ -44,4 +44,4 @@ This file is necessary for installing the dotfiles; it is used for changing the 
 
 ## License
 
-MIT (http://opensource.org/licenses/MIT)
+[MIT License](/LICENSE), Copyright (c) 2015-2017 Pang Yan Han
