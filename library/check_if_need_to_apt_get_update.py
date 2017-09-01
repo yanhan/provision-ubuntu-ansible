@@ -9,7 +9,7 @@ description:
     - Performs `apt-get update` when the Singapore Ubuntu mirror has been
       replaced or when the last successful `apt-get update` was performed >=
       `cache_time_valid` seconds ago
-author: "Pang Yan Han, Philip (@yanhan_pang)"
+author: "Pang Yan Han (@yanhan_pang)"
 notes: []
 requirements:
     - Ubuntu Linux
