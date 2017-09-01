@@ -17,19 +17,19 @@ This is for cloning the [dotfiles](https://github.com/yanhan/dotfiles) repo.
 
 #### ansible/roles/system/vars/main.yml
 
-Open the `ansible/roles/system/vars/main.yml` file.
+Open the `roles/system/vars/main.yml` file.
 
 Edit the value of the `home_path` variable to the absolute path of your `$HOME`.
 
 Edit the value of the `repo_files_path` variable to the absolute path of the
-`ansible/roles/system/files` folder in this repository.
+`roles/system/files` folder in this repository.
 
 Edit the `dotfiles_repo_path` variable to the absolute path of the
 [dotfiles repository](https://github.com/yanhan/dotfiles).
 
 #### ansible/localhost.yml
 
-Open the `ansible/localhost.yml` file.
+Open the `localhost.yml` file.
 
 Edit the value of the `user` variable to your actual username.
 
