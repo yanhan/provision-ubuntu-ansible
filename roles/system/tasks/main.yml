@@ -83,6 +83,7 @@
     - libxml2-dev
     - lzma-dev
     - make
+    - mc    # midnight commander
     - octave
     - openjdk-7-jdk
     - pepperflashplugin-nonfree
