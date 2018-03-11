@@ -36,7 +36,6 @@
     - expat
     - ffmpeg
     - firefox
-    - flashplugin-installer
     - g++
     - gcc
     - gdb
@@ -62,7 +61,6 @@
     - mc    # midnight commander
     - octave
     - openjdk-7-jdk
-    - pepperflashplugin-nonfree
     - pwgen
     - pv
     - screen
@@ -79,11 +77,6 @@
     - xsel
     - zlib1g-dev
     - zsh
-  become: yes
-
-- name: Ensure that flashplugin-installer is always at the latest version
-  apt: name=flashplugin-installer
-       state=latest
   become: yes
 
 - name: Install build dependencies for matplotlib
