@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+if ! dpkg -s python-virtualenv
+then
+  sudo apt-get -y install python-virtualenv
+fi
+
+if ! dpkg -s python-dev
+then
+  sudo apt-get -y install python-dev
+fi
+
+
+if [ ! -d venv ]
+then
+  virtualenv venv
+fi
+
+. venv/bin/activate
+pip install -r requirements.txt
+ansible-playbook -v -K -i inventory texlive.yml
