@@ -85,15 +85,6 @@
 
 - include: install-dotfiles.yml
 
-- name: check if dropbox is installed
-  shell: test -f ~/.dropbox-dist/dropboxd
-  ignore_errors: true
-  register: dropbox_installed
-
-- name: install dropbox
-  shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-  when: dropbox_installed.rc != 0
-
 - name: Install powerline fonts
   include: install-powerline-fonts.yml
 
