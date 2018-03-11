@@ -79,9 +79,6 @@
 
 - include: install-dotfiles.yml
 
-- name: Install powerline fonts
-  include: install-powerline-fonts.yml
-
 - name: Install Haskell
   include: install-haskell.yml
 
