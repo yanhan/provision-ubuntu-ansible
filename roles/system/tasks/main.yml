@@ -1,11 +1,3 @@
-- name: Add git ppa
-  include: ../../../playbook-includes/add-ppa.yml
-           name=git
-           keyserver=keyserver.ubuntu.com
-           key_fingerprint=E1DD270288B4E6030699E45FA1715D88E1DF1F24
-           deb_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
-           deb_src_ppa="http://ppa.launchpad.net/git-core/ppa/ubuntu"
-
 #- name: Add ffmpeg ppa
 #  include: ../../../playbook-includes/add-ppa.yml
 #           name=ffmpeg
