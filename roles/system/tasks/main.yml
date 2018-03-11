@@ -43,7 +43,6 @@
     - git
     - gstreamer0.10-ffmpeg
     - htop
-    - icedtea-plugin
     - imagemagick
     - ipcalc
     - libbz2-dev
