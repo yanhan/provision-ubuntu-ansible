@@ -60,7 +60,6 @@
     - make
     - mc    # midnight commander
     - octave
-    - openjdk-7-jdk
     - pwgen
     - pv
     - screen
