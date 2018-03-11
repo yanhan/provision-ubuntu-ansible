@@ -2,7 +2,7 @@ apt_sources_list: /etc/apt/sources.list
 apt_sg_mirror: http://sg.archive.ubuntu.com
 apt_osuosl_mirror: http://ubuntu.osuosl.org
 
-home_path: /home/philip
+home_path: /home/yh
 repo_files_path: "{{ home_path }}/provision-ubuntu/roles/system/files"
 
 dotfiles_repo_path: "{{home_path}}/dotfiles"

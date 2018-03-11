@@ -12,7 +12,7 @@
   when: oh_my_zsh_installed.rc != 0
 
 - name: change to use zsh shell
-  shell: cat "{{ password_file_path }}" | chsh -s $(which zsh) philip
+  shell: cat "{{ password_file_path }}" | chsh -s $(which zsh) yh
   when: oh_my_zsh_installed.rc != 0
   become: yes
 
