@@ -78,10 +78,6 @@
     - zsh
   become: yes
 
-- name: Install build dependencies for matplotlib
-  shell: apt-get -y build-dep matplotlib
-  become: yes
-
 - include: install-dotfiles.yml
 
 - name: Install powerline fonts
