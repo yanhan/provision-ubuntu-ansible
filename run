@@ -48,5 +48,17 @@ if [ "${retcode}" -ne 0 ]; then
   pyenv install 3.7.4
 fi
 
+set +e
+grep -q 'provision-ubuntu' <<< "$(pyenv versions)"
+retcode=${?}
+set -e
+if [ "${retcode}" -ne 0 ]; then
+  pyenv virtualenv 3.7.4 provision-ubuntu
+fi
+
+eval "$(pyenv init -)"
+pyenv activate provision-ubuntu
+
 pip install -r requirements.txt
 ansible-playbook -v -K -i inventory localhost.yml
+pyenv deactivate
