@@ -21,4 +21,5 @@
   apt:
     name: "stack"
     state: "present"
+  become: yes
   when: check_if_stack_is_installed.rc != 0
