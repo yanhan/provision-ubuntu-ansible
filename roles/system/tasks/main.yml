@@ -1,11 +1,3 @@
-#- name: Add ffmpeg ppa
-#  include: ../../../playbook-includes/add-ppa.yml
-#           name=ffmpeg
-#           keyserver=keyserver.ubuntu.com
-#           key_fingerprint=8E51A6D660CD88D67D65221D90BD7EACED8E640A
-#           deb_ppa=http://ppa.launchpad.net/mc3man/trusty-media/ubuntu
-#           deb_src_ppa=http://ppa.launchpad.net/mc3man/trusty-media/ubuntu
-
 - name: check {{ apt_sources_list }} to see if sg mirror is used
   shell: "cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
   register: nr_lines_with_sg_mirror_in_apt_sources
@@ -41,7 +33,6 @@
     - gdb
     - gimp
     - git
-    - gstreamer0.10-ffmpeg
     - htop
     - imagemagick
     - ipcalc
