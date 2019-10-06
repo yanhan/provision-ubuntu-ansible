@@ -23,8 +23,3 @@ haskell_platform_targz_path: "/tmp/haskell-platform-2014.2.0.0-unknown-linux-x86
 haskell_platform_targz_sha256sum: "0da6879ae657481849e7ec4e5d3c4c035e090824167f97434b48af297ec17cf9"
 haskell_platform_installation_root_folder: /usr/local/haskell/ghc-7.8.3-x86_64
 haskell_platform_activate_bin: "{{ haskell_platform_installation_root_folder }}/bin/activate-hs"
-
-golang_binary_targz_filename: "go1.4.2.linux-amd64.tar.gz"
-golang_binary_targz_url: "https://storage.googleapis.com/golang/{{ golang_binary_targz_filename }}"
-golang_binary_targz_fullpath: "/tmp/{{ golang_binary_targz_filename }}"
-golang_binary_targz_sha256sum: "141b8345932641483c2437bdbd65488a269282ac85f91170805c273f03dd223b"
