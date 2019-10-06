@@ -44,3 +44,4 @@
                   state=present
                   update_cache=yes
   become: yes
+  when: deb_src_ppa is defined
