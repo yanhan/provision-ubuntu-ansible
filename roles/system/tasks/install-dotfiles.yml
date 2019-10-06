@@ -42,7 +42,7 @@
   shell: python setup_home_folder_dotfiles.py gitconfig tmux.conf vimrc zshrc
   args:
     chdir: "{{ dotfiles_repo_path }}"
-  when: dotfiles_git_repo_exists.rc != 0
+  when: dotfiles_git_repo_exists.rc == 0
 
 - name: ensure Vundle git repository exists
   git: repo=https://github.com/gmarik/Vundle.vim.git
