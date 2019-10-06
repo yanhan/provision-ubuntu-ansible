@@ -17,55 +17,58 @@
   when: ag_update.need_to_update
   become: yes
 
+- name: List the packages to install
+  set_fact:
+    ubuntu_packages:
+      - chromium-browser
+      - curl
+      # get metadata of image files
+      - exiftool
+      - expat
+      - ffmpeg
+      - firefox
+      - g++
+      - gcc
+      - gdb
+      - gimp
+      - git
+      - htop
+      - imagemagick
+      - ipcalc
+      - libbz2-dev
+      - libcurl4-openssl-dev
+      - libexpat1-dev
+      - libgmp-dev
+      - liblzma-dev
+      - libncurses5-dev
+      - libpcre3
+      - libpcre3-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - lzma-dev
+      - make
+      - mc    # midnight commander
+      - octave
+      - pwgen
+      - pv
+      - screen
+      - scrot
+      - sqlite3
+      - tcl8.6
+      - tcl8.6-dev
+      - tk8.6
+      - tk8.6-dev
+      - tmux
+      - unzip
+      - vim
+      - xclip
+      - xsel
+      - zlib1g-dev
+      - zsh
+
 - name: install some packages
-  apt: name={{ item }}
+  apt: name="{{ ubuntu_packages }}"
        state=present
-  with_items:
-    - chromium-browser
-    - curl
-    # get metadata of image files
-    - exiftool
-    - expat
-    - ffmpeg
-    - firefox
-    - g++
-    - gcc
-    - gdb
-    - gimp
-    - git
-    - htop
-    - imagemagick
-    - ipcalc
-    - libbz2-dev
-    - libcurl4-openssl-dev
-    - libexpat1-dev
-    - libgmp-dev
-    - liblzma-dev
-    - libncurses5-dev
-    - libpcre3
-    - libpcre3-dev
-    - libsqlite3-dev
-    - libssl-dev
-    - lzma-dev
-    - make
-    - mc    # midnight commander
-    - octave
-    - pwgen
-    - pv
-    - screen
-    - scrot
-    - sqlite3
-    - tcl8.6
-    - tcl8.6-dev
-    - tk8.6
-    - tk8.6-dev
-    - tmux
-    - unzip
-    - vim
-    - xclip
-    - xsel
-    - zlib1g-dev
-    - zsh
   become: yes
 
 - include: install-dotfiles.yml
