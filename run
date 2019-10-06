@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 set -e
 
 early_abort=false
@@ -59,3 +58,6 @@ pyenv activate provision-ubuntu
 pip install -r requirements.txt
 ansible-playbook -v -K -i inventory localhost.yml
 pyenv deactivate
+
+printf "\n\nPlease run the following commands to complete the setup:\n\n"
+printf "    chsh --shell /bin/zsh yh\n"
