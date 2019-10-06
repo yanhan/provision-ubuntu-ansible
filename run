@@ -61,3 +61,5 @@ pyenv deactivate
 
 printf "\n\nPlease run the following commands to complete the setup:\n\n"
 printf "    chsh --shell /bin/zsh yh\n"
+printf "\n\nAfter setting your iptables rules, run:\n\n"
+printf "    sudo dpkg-reconfigure iptables-persistent\n\n"
