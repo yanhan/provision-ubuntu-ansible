@@ -79,3 +79,10 @@
 
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
+
+- name: "Disable cups on system startup"
+  systemd:
+    name: "cups.service"
+    enabled: no
+  become: yes
+  ignore_errors: yes
