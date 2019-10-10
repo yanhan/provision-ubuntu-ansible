@@ -4,6 +4,7 @@ apt_osuosl_mirror: http://ubuntu.osuosl.org
 
 home_path: /home/yh
 repo_files_path: "{{ home_path }}/provision-ubuntu-ansible/roles/system/files"
+code_dir_path: "{{ home_path }}/code"
 
 dotfiles_repo_path: "{{home_path}}/dotfiles"
 vundle_repo_path: "{{home_path}}/.vim/bundle/Vundle.vim"

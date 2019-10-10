@@ -1,26 +1,28 @@
 ---
+- name: Add variable to store path to zsh-git-prompt repo
+  set_fact:
+    zsh_git_prompt_repo_path: "{{ code_dir_path }}/zsh-git-prompt"
+
 - name: Check if the zsh-git-prompt repo exists
-  shell: "test -d ~/zsh-git-prompt"
+  shell: "test -d {{ zsh_git_prompt_repo_path }}"
   ignore_errors: True
   register: check_if_zsh_git_prompt_repo_exists
 
 - name: Clone the zsh-git-prompt repo
-  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt"
-  args:
-    chdir: "~"
+  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt  {{ zsh_git_prompt_repo_path }}"
   when: check_if_zsh_git_prompt_repo_exists.rc != 0
 
 - name: Use stack to install the haskell compiler to this repo
   shell: "stack setup"
   args:
-    chdir: "~/zsh-git-prompt"
+    chdir: "{{ zsh_git_prompt_repo_path }}"
 
 - name: Build the zsh-git-prompt binary
   shell: "stack build"
   args:
-    chdir: "~/zsh-git-prompt"
+    chdir: "{{ zsh_git_prompt_repo_path }}"
 
 - name: Install the zsh-git-prompt binary
   shell: "stack install"
   args:
-    chdir: "~/zsh-git-prompt"
+    chdir: "{{ zsh_git_prompt_repo_path }}"
