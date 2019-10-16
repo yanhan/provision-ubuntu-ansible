@@ -18,7 +18,7 @@ tar xzf install-tl-unx.tar.gz
 cd `tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D'`
 # run the installation script, with stdin from `/tmp/installer-input`
 ./install-tl < ../installer-input
-ln -s /usr/local/texlive/2014/bin/* /opt/texbin
+ln -s /usr/local/texlive/2018/bin/* /opt/texbin
 
 # create directory for installing debian `texlive-local` fake package
 rm -rf /tmp/tl-equivs

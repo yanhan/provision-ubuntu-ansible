@@ -54,5 +54,6 @@
   when: texlive_installed.rc != 0
 
 - name: install fake TeXLive package
-  shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2014-1_all.deb"
+  shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2018-1_all.deb"
+  become: yes
   when: texlive_installed.rc != 0
