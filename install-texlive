@@ -9,6 +9,7 @@ main() {
 	eval "$(pyenv virtualenv-init -)"
 	pyenv activate provision-ubuntu
 	set -u
+
 	ansible-playbook -v -K -i inventory --tags install_texlive texlive.yml
 }
 

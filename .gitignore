@@ -1,1 +1,2 @@
 /ansible/roles/system/files/password.txt
+/roles/system/files/debian-equivs-*.txt
