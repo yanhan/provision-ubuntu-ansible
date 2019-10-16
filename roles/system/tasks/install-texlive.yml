@@ -5,6 +5,7 @@
 - name: remove tex-common
   apt: name=tex-common
        state=absent
+  become: yes
 
 - name: remove Chinese fonts installation log file
   shell: "rm -f {{ rsync_fonts_log_file_path }}"
@@ -30,6 +31,7 @@
   apt: name=equivs
        state=present
        install_recommends=no
+  become: yes
 
 - name: check if TeXLive is installed
   shell: dpkg -s texlive-local
@@ -39,6 +41,7 @@
 - name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
   shell: "{{ texlive_uninstall_script_path }}"
   ignore_errors: True
+  become: yes
   when: texlive_installed.rc != 0
 
 - name: copy TeXLive installer to /tmp
@@ -47,10 +50,12 @@
 
 - name: install TeXLive
   shell: "{{ texlive_install_script_path }}"
+  become: yes
   when: texlive_installed.rc != 0
 
 - name: prepend TeXLive bin path to PATH env var in /etc/environment
   shell: "{{ texlive_update_etc_environment_script_path }}"
+  become: yes
   when: texlive_installed.rc != 0
 
 - name: install fake TeXLive package
