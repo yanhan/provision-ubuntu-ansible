@@ -2,4 +2,4 @@
   connection: local
   user: yh
   roles:
-  - install-texlive
+  - system

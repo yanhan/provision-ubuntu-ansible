@@ -1,23 +1,15 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
-if ! dpkg -s python-virtualenv
-then
-  sudo apt-get -y install python-virtualenv
-fi
+main() {
+	set +u
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+	pyenv activate provision-ubuntu
+	set -u
+	ansible-playbook -v -K -i inventory --tags install_texlive texlive.yml
+}
 
-if ! dpkg -s python-dev
-then
-  sudo apt-get -y install python-dev
-fi
-
-
-if [ ! -d venv ]
-then
-  virtualenv venv
-fi
-
-. venv/bin/activate
-pip install -r requirements.txt
-ansible-playbook -v -K -i inventory texlive.yml
+main "$@"

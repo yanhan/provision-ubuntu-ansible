@@ -86,3 +86,7 @@
     enabled: no
   become: yes
   ignore_errors: yes
+
+- name: "Install texlive"
+  include: install-texlive.yml
+  tags: ["never", "install_texlive"]
