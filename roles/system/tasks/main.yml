@@ -60,6 +60,7 @@
       - lzma-dev
       - make
       - mc    # midnight commander
+      - net-tools
       - octave
       - pwgen
       - pv
