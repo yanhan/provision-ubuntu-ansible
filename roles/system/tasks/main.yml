@@ -17,6 +17,17 @@
     repo: "deb https://download.virtualbox.org/virtualbox/debian bionic contrib"
   become: yes
 
+- name: "Add sublime text apt key"
+  apt_key:
+    file: "{{ repo_files_path }}/sublimehq-pub.gpg"
+    id: "1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A"
+  become: yes
+
+- name: "Add sublime text apt repository"
+  apt_repository:
+    repo: "deb https://download.sublimetext.com/ apt/stable/"
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
@@ -31,6 +42,7 @@
 - name: List the packages to install
   set_fact:
     ubuntu_packages:
+      - apt-transport-https
       - chromium-browser
       - curl
       # get metadata of image files
@@ -67,6 +79,7 @@
       - screen
       - scrot
       - sqlite3
+      - sublime-text
       - tcl8.6
       - tcl8.6-dev
       - tk8.6
