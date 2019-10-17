@@ -6,6 +6,17 @@
   shell: perl -pi -e 's#^(deb|deb-src) {{ apt_sg_mirror }}#\1 {{ apt_osuosl_mirror }}#' /etc/apt/sources.list
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0
 
+- name: "Add virtualbox key"
+  apt_key:
+    file: "{{ repo_files_path }}/oracle_vbox_2016.asc"
+    id: "B9F8D658297AF3EFC18D5CDFA2F683C52980AECF"
+  become: yes
+
+- name: "Add virtualbox apt repository"
+  apt_repository:
+    repo: "deb https://download.virtualbox.org/virtualbox/debian bionic contrib"
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
@@ -62,6 +73,7 @@
       - tmux
       - unzip
       - vim
+      - virtualbox-6.0
       - xclip
       - xsel
       - zlib1g-dev
