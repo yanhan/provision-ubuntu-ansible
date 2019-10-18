@@ -68,6 +68,8 @@
       - libncurses5-dev
       - libpcre3
       - libpcre3-dev
+      - libreoffice-calc
+      - libreoffice-writer
       - libsqlite3-dev
       - libssl-dev
       - lzma-dev
