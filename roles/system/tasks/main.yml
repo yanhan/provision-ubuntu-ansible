@@ -28,6 +28,16 @@
     repo: "deb https://download.sublimetext.com/ apt/stable/"
   become: yes
 
+- name: "Add Google Cloud apt key"
+  apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+  become: yes
+
+- name: "Add kubectl apt repository"
+  apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
@@ -60,6 +70,7 @@
       - iptables-persistent
       - ipcalc
       - jq
+      - kubectl
       - libbz2-dev
       - libcurl4-openssl-dev
       - libexpat1-dev
