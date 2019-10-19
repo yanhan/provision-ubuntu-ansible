@@ -117,6 +117,9 @@
 - name: Install Haskell
   include: install-haskell.yml
 
+- name: "Install Golang"
+  include: install-golang.yml
+
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
 

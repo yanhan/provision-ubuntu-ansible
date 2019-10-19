@@ -1,3 +1,4 @@
 /ansible/roles/system/files/password.txt
 /roles/system/files/debian-equivs-*.txt
 /roles/system/files/install-tl-unx.tar.gz
+/roles/system/files/go*.tar.gz
