@@ -38,6 +38,21 @@
     repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
   become: yes
 
+- name: "Add docker apt key"
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+  become: yes
+
+- name: "Get output of lsb_release -cs"
+  shell: lsb_release -cs
+  register: lsb_release_cs
+
+- name: "Add docker apt repository"
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release_cs.stdout }} stable"
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
@@ -54,7 +69,10 @@
     ubuntu_packages:
       - apt-transport-https
       - chromium-browser
+      - containerd.io
       - curl
+      - docker-ce
+      - docker-ce-cli
       # get metadata of image files
       - exiftool
       - expat
@@ -65,6 +83,7 @@
       - gdb
       - gimp
       - git
+      - gnupg-agent
       - htop
       - imagemagick
       - iptables-persistent
