@@ -126,6 +126,9 @@
       - zlib1g-dev
       - zsh
 
+- name: Install ripgrep
+  include: install-ripgrep.yml
+
 - name: install some packages
   apt: name="{{ ubuntu_packages }}"
        state=present

@@ -14,6 +14,10 @@ golang_binary_targz_fullpath: "{{ repo_files_path }}/go1.13.3.linux-amd64.tar.gz
 golang_binary_targz_sha256sum: "0804bf02020dceaa8a7d7275ee79f7a142f1996bfd0c39216ccb405f93f994c0"
 golang_binary_targz_url: "https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz"
 home_fonts_path: "{{ home_path }}/.fonts/"
+ripgrep_deb:
+  path: "{{ repo_files_path }}/ripgrep_11.0.2_amd64.deb"
+  url: "https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb"
+  sha256sum: "cecbe73abf3c672fde070c5c1d2ea303d97dae0af9afa0655028ae0d70dd11e8"
 rsync_fonts_log_file_path: /tmp/pl-rsync-fonts-log-file
 texlive_install_script_path: "{{ repo_files_path }}/install-texlive"
 texlive_unix_installer_gz: install-tl-unx.tar.gz
