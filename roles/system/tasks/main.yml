@@ -145,6 +145,9 @@
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
 
+- name: Install nvm
+  include: nvm.yml
+
 - name: "Install lock-screen script"
   copy:
     src: "lock-screen"
