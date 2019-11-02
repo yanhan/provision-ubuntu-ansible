@@ -147,8 +147,6 @@
 
 - name: Install nvm
   include: nvm.yml
-  tags:
-    - nodejs
 
 - name: "Install lock-screen script"
   copy:
