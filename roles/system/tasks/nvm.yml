@@ -1,7 +1,10 @@
 - name: Check if nvm is installed
-  shell: command -v nvm >/dev/null 2>&1
+  shell: "NVM_DIR=\"{{ ansible_env.HOME }}\"/.nvm source \"${NVM_DIR}\"/nvm.sh && command -v nvm >/dev/null 2>&1"
+  args:
+    executable: /bin/bash
   register: check_nvm_installed
   ignore_errors: true
+  changed_when: false
 
 - name: Ensure $HOME/.nvm directory exists
   file:
