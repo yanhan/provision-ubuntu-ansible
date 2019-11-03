@@ -3,3 +3,5 @@
 /roles/system/files/install-tl-unx.tar.gz
 /roles/system/files/go*.tar.gz
 /roles/system/files/ripgrep*
+/roles/system/files/tmp_downloads
+!/roles/system/files/tmp_downloads/.gitkeep
