@@ -1,0 +1,21 @@
+- name: Check if vagrant is installed
+  shell: command -v vagrant >/dev/null 2>&1
+  register: check_if_vagrant_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Download vagrant
+  get_url:
+    url: "{{ vagrant_2_2_6.url }}"
+    dest: "{{ vagrant_2_2_6.download_dest }}"
+    sha256sum: "{{ vagrant_2_2_6.sha256sum }}"
+  when: check_if_vagrant_installed.rc != 0
+
+- name: Extract vagrant binary
+  unarchive:
+    src: "{{ vagrant_2_2_6.download_dest }}"
+    remote_src: yes
+    dest: "{{ home_bin_path }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+  when: check_if_vagrant_installed.rc != 0

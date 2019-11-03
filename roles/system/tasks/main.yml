@@ -148,6 +148,9 @@
 - name: Install nvm
   include: nvm.yml
 
+- name: Install vagrant
+  include: vagrant.yml
+
 - name: "Install lock-screen script"
   copy:
     src: "lock-screen"
