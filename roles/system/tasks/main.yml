@@ -107,6 +107,7 @@
       - mc    # midnight commander
       - net-tools
       - octave
+      - openjdk-8-jdk
       - pwgen
       - pv
       - screen
