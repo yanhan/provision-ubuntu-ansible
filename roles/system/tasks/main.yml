@@ -110,6 +110,7 @@
       - openjdk-8-jdk
       - pwgen
       - pv
+      - r-base
       - screen
       - scrot
       - sqlite3
