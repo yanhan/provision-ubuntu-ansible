@@ -102,6 +102,7 @@
       - libreoffice-writer
       - libsqlite3-dev
       - libssl-dev
+      - libxml2-dev
       - lzma-dev
       - make
       - mc    # midnight commander
