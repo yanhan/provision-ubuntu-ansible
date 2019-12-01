@@ -95,6 +95,7 @@
       - libexpat1-dev
       - libgmp-dev
       - liblzma-dev
+      - libmysqlclient-dev
       - libncurses5-dev
       - libpcre3
       - libpcre3-dev
