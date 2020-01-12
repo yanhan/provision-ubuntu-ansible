@@ -35,11 +35,11 @@ if ! command -v pyenv >/dev/null 2>&1; then
 fi
 
 set +e
-grep -q '3.7.4' <<< "$(pyenv versions)"
+grep -q '3.8.0' <<< "$(pyenv versions)"
 retcode=${?}
 set -e
 if [ "${retcode}" -ne 0 ]; then
-  pyenv install 3.7.4
+  pyenv install 3.8.0
 fi
 
 set +e
@@ -47,7 +47,7 @@ grep -q 'provision-ubuntu' <<< "$(pyenv versions)"
 retcode=${?}
 set -e
 if [ "${retcode}" -ne 0 ]; then
-  pyenv virtualenv 3.7.4 provision-ubuntu
+  pyenv virtualenv 3.8.0 provision-ubuntu
 fi
 
 eval "$(pyenv init -)"
