@@ -111,6 +111,7 @@
       - net-tools
       - octave
       - openjdk-8-jdk
+      - protobuf-compiler
       - pwgen
       - pv
       - r-base
