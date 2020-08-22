@@ -89,6 +89,7 @@
       - iptables-persistent
       - ipcalc
       - jq
+      - keepass2
       - kubectl
       - libbz2-dev
       - libcurl4-openssl-dev
