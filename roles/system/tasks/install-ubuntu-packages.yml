@@ -127,6 +127,7 @@
       - unzip
       - vim
       - virtualbox-6.0
+      - vlc
       - xclip
       - xsel
       - zlib1g-dev
