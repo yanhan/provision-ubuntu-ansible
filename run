@@ -54,7 +54,7 @@ eval "$(pyenv init -)"
 pyenv activate provision-ubuntu
 
 pip install -r requirements.txt
-ansible-playbook -v -K -i inventory localhost.yml
+ansible-playbook -v -K -i inventory "$@" localhost.yml
 pyenv deactivate
 
 printf "\n\nPlease run the following commands to complete the setup:\n\n"
