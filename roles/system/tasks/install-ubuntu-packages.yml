@@ -109,6 +109,7 @@
       - make
       - mc    # midnight commander
       - net-tools
+      - neovim
       - octave
       - openjdk-8-jdk
       - protobuf-compiler
