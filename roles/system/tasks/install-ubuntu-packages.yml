@@ -139,6 +139,7 @@
        state=present
   become: yes
 
+# From https://github.com/microsoft/vscode-postgresql/issues/77#issuecomment-701495023
 - name: Check if libffi6 is installed
   shell: dpkg -L libffi6
   register: check_if_libffi6_installed
