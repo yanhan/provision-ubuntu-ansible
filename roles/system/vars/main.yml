@@ -34,3 +34,8 @@ vagrant_2_2_6:
   sha256sum: "a08c7765baae1ee88b3bc0bace718087a84e2023d1f2ecc134aa735b89515a03"
   download_dest: "{{ tmp_downloads_path }}/vagrant_2.2.6_linux_amd64.zip"
   install_path: "{{ home_bin_path }}/vagrant"
+
+libffi6:
+  url: "https://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb"
+  sha256sum: fa26945b0aadfc72ec623c68be9cc59235a7fe42e2388f7015fd131f4fb06dc9
+  download_dest: "{{ tmp_downloads_path }}/libffi6_3.2.1-8_amd64.deb"

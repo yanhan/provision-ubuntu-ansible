@@ -137,3 +137,21 @@
   apt: name="{{ ubuntu_packages }}"
        state=present
   become: yes
+
+- name: Check if libffi6 is installed
+  shell: dpkg -L libffi6
+  register: check_if_libffi6_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Download libffi6
+  get_url:
+    url: "{{ libffi6.url }}"
+    dest: "{{ libffi6.download_dest }}"
+    sha256sum: "{{ libffi6.sha256sum }}"
+  when: check_if_libffi6_installed.rc != 0
+
+- name: Install libffi6
+  apt:
+    deb: "{{ libffi6.download_dest }}"
+  become: yes
