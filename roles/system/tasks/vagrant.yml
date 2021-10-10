@@ -3,19 +3,32 @@
   register: check_if_vagrant_installed
   ignore_errors: true
   changed_when: false
+  tags: vagrant
 
-- name: Download vagrant
-  get_url:
-    url: "{{ vagrant_2_2_6.url }}"
-    dest: "{{ vagrant_2_2_6.download_dest }}"
-    sha256sum: "{{ vagrant_2_2_6.sha256sum }}"
+- name: Add Hashicorp apt key
+  ansible.builtin.apt_key:
+    url: "https://apt.releases.hashicorp.com/gpg"
   when: check_if_vagrant_installed.rc != 0
+  become: yes
+  tags: vagrant
 
-- name: Extract vagrant binary
-  unarchive:
-    src: "{{ vagrant_2_2_6.download_dest }}"
-    remote_src: yes
-    dest: "{{ home_bin_path }}"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+- name: Get output of lsb_release -cs
+  shell: lsb_release -cs
   when: check_if_vagrant_installed.rc != 0
+  register: lsb_release_cs
+  tags: vagrant
+
+- name: Add Hashicorp repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release_cs.stdout }} main"
+  become: yes
+  when: check_if_vagrant_installed.rc != 0
+  tags: vagrant
+
+- name: Install vagrant
+  ansible.builtin.apt:
+    name: vagrant
+    update_cache: yes
+  become: yes
+  when: check_if_vagrant_installed.rc != 0
+  tags: vagrant
