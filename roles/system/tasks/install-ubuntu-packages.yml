@@ -28,14 +28,15 @@
     repo: "deb https://download.sublimetext.com/ apt/stable/"
   become: yes
 
-- name: "Add Google Cloud apt key"
+- name: "Add Google Cloud apt key (also for k8s)"
   apt_key:
     url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
   become: yes
 
-- name: "Add kubectl apt repository"
+- name: "Add k8s apt repository (for kubectl)"
   apt_repository:
-    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
   become: yes
 
 - name: "Add docker apt key"
@@ -68,6 +69,7 @@
   set_fact:
     ubuntu_packages:
       - apt-transport-https
+      - ca-certificates
       - chromium-browser
       - containerd.io
       - curl
