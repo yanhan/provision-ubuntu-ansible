@@ -131,6 +131,7 @@
       - vim
       - virtualbox-6.0
       - vlc
+      - xchm
       - xclip
       - xsel
       - zlib1g-dev
