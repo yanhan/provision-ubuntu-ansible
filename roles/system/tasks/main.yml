@@ -13,6 +13,8 @@
 
 - name: "Install Golang"
   include: install-golang.yml
+  tags:
+    - golang
 
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
