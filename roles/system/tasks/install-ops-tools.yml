@@ -2,3 +2,8 @@
   git:
     repo: "git://github.com/tfutils/tfenv.git"
     dest: "{{ ansible_env.HOME }}/.tfenv"
+
+- name: Clone tgenv repo
+  git:
+    repo: "git://github.com/cunymatthieu/tgenv"
+    dest: "{{ ansible_env.HOME }}/.tgenv"
