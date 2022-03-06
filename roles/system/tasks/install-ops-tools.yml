@@ -1,0 +1,4 @@
+- name: Clone tfenv repo
+  git:
+    repo: "git://github.com/tfutils/tfenv.git"
+    dest: "{{ ansible_env.HOME }}/.tfenv"

@@ -16,6 +16,11 @@
   tags:
     - golang
 
+- name: "Install ops tools"
+  include: install-ops-tools.yml
+  tags:
+    - ops
+
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
 
