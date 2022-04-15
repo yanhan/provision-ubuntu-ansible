@@ -135,6 +135,7 @@
       - xchm
       - xclip
       - xsel
+      - yamllint
       - zlib1g-dev
       - zsh
 
