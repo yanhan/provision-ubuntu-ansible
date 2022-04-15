@@ -135,6 +135,7 @@
       - pwgen
       - pv
       - r-base
+      - ripgrep
       - screen
       - scrot
       - sqlite3

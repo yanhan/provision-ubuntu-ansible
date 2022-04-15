@@ -3,9 +3,6 @@
   tags:
     - ubuntu
 
-- name: Install ripgrep
-  include: install-ripgrep.yml
-
 - include: install-dotfiles.yml
 
 - name: Install Haskell
