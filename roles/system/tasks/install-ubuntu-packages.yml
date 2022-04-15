@@ -54,6 +54,22 @@
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release_cs.stdout }} stable"
   become: yes
 
+# Refer to https://code.visualstudio.com/docs/setup/linux?msclkid=1ac46317bc6411ecb47fb8ff0f8c2151
+- name: Add Microsoft packages apt key
+  apt_key:
+    file: "{{ repo_files_path }}/packages.microsoft.gpg"
+    keyring: /etc/apt/trusted.gpg.d/packages.microsoft.gpg
+  become: yes
+
+- name: Add Microsoft apt repo
+  lineinfile:
+    line: "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
+    path: /etc/apt/sources.list.d/vscode.list
+    owner: root
+    group: root
+    create: yes
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
@@ -71,6 +87,7 @@
       - apt-transport-https
       - ca-certificates
       - chromium-browser
+      - code
       - containerd.io
       - curl
       - docker-ce
