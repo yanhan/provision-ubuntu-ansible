@@ -1,0 +1,11 @@
+---
+- name: Set fact to store global npm packages
+  set_fact:
+    global_npm_packages:
+      - jsonlint
+
+- name: Install global npm packages
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items: "{{ global_npm_packages }}"
