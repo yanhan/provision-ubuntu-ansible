@@ -18,7 +18,7 @@
   shell: "{{ nvm_install_script_path }}"
   when: check_nvm_installed.rc != 0
 
-- name: Install nodejs 12.13.0 using nvm
-  shell: "NVM_DIR=\"{{ ansible_env.HOME }}\"/.nvm source \"${NVM_DIR}\"/nvm.sh &&  nvm install 12.13.0"
+- name: Install nodejs 16.14.2 using nvm
+  shell: "NVM_DIR=\"{{ ansible_env.HOME }}\"/.nvm source \"${NVM_DIR}\"/nvm.sh &&  nvm install 16.14.2"
   args:
     executable: /bin/bash
