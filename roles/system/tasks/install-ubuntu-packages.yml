@@ -71,6 +71,11 @@
     create: yes
   become: yes
 
+- name: Add git-core ppa
+  apt_repository:
+    repo: ppa:git-core/ppa
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   check_if_need_to_apt_get_update: cache_valid_time=86400
                                    nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
