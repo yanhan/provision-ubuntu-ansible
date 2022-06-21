@@ -1,3 +1,4 @@
+---
 - name: check {{ apt_sources_list }} to see if sg mirror is used
   shell: "cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
   register: nr_lines_with_sg_mirror_in_apt_sources
@@ -85,6 +86,7 @@
   set_fact:
     ubuntu_packages:
       - apt-transport-https
+      - autojump
       - ca-certificates
       - chromium-browser
       - code
