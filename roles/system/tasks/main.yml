@@ -5,6 +5,11 @@
 
 - include: install-dotfiles.yml
 
+- name: Install asdf
+  include: install-asdf.yml
+  tags:
+    - asdf
+
 - name: Install Golang
   include: install-golang.yml
   tags:
