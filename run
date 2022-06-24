@@ -56,7 +56,7 @@ EOF
   fi
 fi
 
-python_version=3.8.0
+python_version=3.10.4
 set +e
 grep -q "${python_version}" <<< "$(pyenv versions)"
 retcode=${?}
