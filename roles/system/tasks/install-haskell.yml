@@ -1,9 +1,0 @@
-- name: Check if Stack is installed
-  shell: command -v stack >/dev/null 2>&1
-  ignore_errors: True
-  register: check_if_stack_is_installed
-
-- name: install Stack
-  shell: "{{ repo_files_path }}/get-haskell-stack.sh"
-  become: yes
-  when: check_if_stack_is_installed.rc != 0

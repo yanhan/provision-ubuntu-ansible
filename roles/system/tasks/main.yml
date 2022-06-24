@@ -5,9 +5,6 @@
 
 - include: install-dotfiles.yml
 
-- name: Install Haskell
-  include: install-haskell.yml
-
 - name: "Install Golang"
   include: install-golang.yml
   tags:
