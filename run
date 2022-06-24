@@ -65,16 +65,32 @@ if [ "${retcode}" -ne 0 ]; then
   pyenv install "${python_version}"
 fi
 
+eval "$(pyenv init -)"
+
+readonly venv_name=provision-ubuntu
+create_venv=false
 set +e
-grep -q 'provision-ubuntu' <<< "$(pyenv versions)"
+grep -q "${venv_name}" <<< "$(pyenv versions)"
 retcode=${?}
 set -e
 if [ "${retcode}" -ne 0 ]; then
-  pyenv virtualenv "${python_version}" provision-ubuntu
+  create_venv=true
+else
+  pyenv activate "${venv_name}"
+  venv_python_version="$(python --version | grep -Eo ' [[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$' | xargs)"
+  pyenv deactivate
+  if [ "${venv_python_version}" != "${python_version}" ]; then
+    printf "Uninstalling existing virtualenv %s because its python version %s is not the desired %s\n"  "${venv_name}"  "${venv_python_version}"  "${python_version}"
+    pyenv uninstall -f "${venv_name}"
+    create_venv=true
+  fi
 fi
 
-eval "$(pyenv init -)"
-pyenv activate provision-ubuntu
+if [ "${create_venv}" = "true" ]; then
+  pyenv virtualenv "${python_version}" "${venv_name}"
+fi
+
+pyenv activate "${venv_name}"
 
 pip install -r requirements.txt
 ansible-playbook -v -K -i inventory "$@" localhost.yml
