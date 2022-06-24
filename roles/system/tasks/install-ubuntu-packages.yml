@@ -7,50 +7,50 @@
   shell: perl -pi -e 's#^(deb|deb-src) {{ apt_sg_mirror }}#\1 {{ apt_osuosl_mirror }}#' /etc/apt/sources.list
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0
 
-- name: "Add virtualbox key"
+- name: Add virtualbox key
   apt_key:
     file: "{{ repo_files_path }}/oracle_vbox_2016.asc"
     id: "B9F8D658297AF3EFC18D5CDFA2F683C52980AECF"
   become: yes
 
-- name: "Add virtualbox apt repository"
+- name: Add virtualbox apt repository
   apt_repository:
     repo: "deb https://download.virtualbox.org/virtualbox/debian bionic contrib"
   become: yes
 
-- name: "Add sublime text apt key"
+- name: Add sublime text apt key
   apt_key:
     file: "{{ repo_files_path }}/sublimehq-pub.gpg"
     id: "1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A"
   become: yes
 
-- name: "Add sublime text apt repository"
+- name: Add sublime text apt repository
   apt_repository:
     repo: "deb https://download.sublimetext.com/ apt/stable/"
   become: yes
 
-- name: "Add Google Cloud apt key (also for k8s)"
+- name: Add Google Cloud apt key (also for k8s)
   apt_key:
     url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
     keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
   become: yes
 
-- name: "Add k8s apt repository (for kubectl)"
+- name: Add k8s apt repository (for kubectl)
   apt_repository:
     repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
   become: yes
 
-- name: "Add docker apt key"
+- name: Add docker apt key
   apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
     id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
   become: yes
 
-- name: "Get output of lsb_release -cs"
+- name: Get output of lsb_release -cs
   shell: lsb_release -cs
   register: lsb_release_cs
 
-- name: "Add docker apt repository"
+- name: Add docker apt repository
   apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release_cs.stdout }} stable"
   become: yes

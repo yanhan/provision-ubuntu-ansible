@@ -5,12 +5,12 @@
 
 - include: install-dotfiles.yml
 
-- name: "Install Golang"
+- name: Install Golang
   include: install-golang.yml
   tags:
     - golang
 
-- name: "Install ops tools"
+- name: Install ops tools
   include: install-ops-tools.yml
   tags:
     - ops
@@ -31,7 +31,7 @@
 - name: Install vagrant
   include: vagrant.yml
 
-- name: "Install lock-screen script"
+- name: Install lock-screen script
   copy:
     src: "lock-screen"
     dest: "/usr/local/bin/lock-screen"
@@ -40,13 +40,13 @@
     mode: "0755"
   become: yes
 
-- name: "Disable cups on system startup"
+- name: Disable cups on system startup
   systemd:
-    name: "cups.service"
+    name: cups.service
     enabled: no
   become: yes
   ignore_errors: yes
 
-- name: "Install texlive"
+- name: Install texlive
   include: install-texlive.yml
   tags: ["never", "install_texlive"]

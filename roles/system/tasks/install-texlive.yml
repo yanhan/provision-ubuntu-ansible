@@ -1,12 +1,12 @@
 # Installs TeXLive
 
-- name: "Download debian-equivs template file"
+- name: Download debian-equivs template file
   get_url:
     url: "https://www.tug.org/texlive/files/debian-equivs-2018-ex.txt"
     dest: "{{ texlive_equivs_file_path }}"
     sha256sum: "26b9f61431749c342c32b469104eb44ffefaee6c51697323aec12e07e3980b06"
 
-- name: "Download texlive installer"
+- name: Download texlive installer
   get_url:
     url: "http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
     dest: "{{ texlive_unix_installer_gz_path }}"
