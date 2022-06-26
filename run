@@ -57,12 +57,8 @@ EOF
   fi
 fi
 
-python_version=3.10.4
-set +e
-grep -q "${python_version}" <<< "$(pyenv versions)"
-retcode=${?}
-set -e
-if [ "${retcode}" -ne 0 ]; then
+readonly python_version=3.10.4
+if [ "$(grep -c "${python_version}" <<< "$(pyenv versions)")" -eq 0 ]; then
   pyenv install "${python_version}"
 fi
 
@@ -70,11 +66,7 @@ eval "$(pyenv init -)"
 
 readonly venv_name=provision-ubuntu
 create_venv=false
-set +e
-grep -q "${venv_name}" <<< "$(pyenv versions)"
-retcode=${?}
-set -e
-if [ "${retcode}" -ne 0 ]; then
+if [ "$(grep -c "${venv_name}" <<< "$(pyenv versions)")" -eq 0 ]; then
   create_venv=true
 else
   pyenv activate "${venv_name}"
