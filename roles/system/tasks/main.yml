@@ -1,3 +1,4 @@
+---
 - name: Install Ubuntu packages
   include: install-ubuntu-packages.yml
   tags:

@@ -1,3 +1,4 @@
+---
 - name: check if oh my zsh is installed
   shell: test -d .oh-my-zsh
   args:
@@ -10,6 +11,8 @@
     git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&
       cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
   when: oh_my_zsh_installed.rc != 0
+  tags:
+    - skip_ansible_lint
 
 - name: check if dotfiles git repository exists
   shell: test -d dotfiles
@@ -19,13 +22,13 @@
   register: dotfiles_git_repo_exists
 
 - name: clone dotfiles git repository if it does not exist
-  shell: git clone git://github.com/yanhan/dotfiles.git
+  shell: git clone git://github.com/yanhan/dotfiles.git  # noqa command-instead-of-module
   args:
     chdir: "{{ home_path }}"
   when: dotfiles_git_repo_exists.rc != 0
 
 - name: dotfiles repo - check git remote origin is in git protocol
-  shell: git remote -v | grep '^origin' | grep 'git@github.com:'
+  shell: git remote -v | grep '^origin' | grep 'git@github.com:'  # noqa command-instead-of-module
   args:
     chdir: "{{ dotfiles_repo_path }}"
   register: dotfiles_origin_check
@@ -33,7 +36,7 @@
   when: dotfiles_git_repo_exists.rc != 0
 
 - name: dotfiles repo - change remote origin
-  shell: git remote rm origin && git remote add origin git@github.com:yanhan/dotfiles.git
+  shell: git remote rm origin && git remote add origin git@github.com:yanhan/dotfiles.git  # noqa command-instead-of-module
   args:
     chdir: "{{ dotfiles_repo_path }}"
   when: dotfiles_git_repo_exists.rc != 0 and dotfiles_origin_check.rc != 0
@@ -48,13 +51,17 @@
   file:
     path: "{{ home_path }}/.vim/autoload"
     state: directory
+    mode: 0750
 
 - name: Install vim-plug
   copy:
     src: plug.vim
     dest: "{{ home_path }}/.vim/autoload/plug.vim"
+    mode: 0750
   register: just_installed_vim_plug
 
 - name: Install Vim plugins
   shell: vim +PlugInstall +qall
   when: just_installed_vim_plug.changed
+  tags:
+    - skip_ansible_lint

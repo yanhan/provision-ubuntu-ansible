@@ -1,0 +1,9 @@
+---
+skip_list:
+  - command-instead-of-shell
+  - fqcn-builtins
+  - ignore-errors
+  - no-changed-when
+
+warn_list:
+  - git-latest

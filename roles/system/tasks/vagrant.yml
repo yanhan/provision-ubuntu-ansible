@@ -1,3 +1,4 @@
+---
 - name: Check if vagrant is installed
   shell: command -v vagrant >/dev/null 2>&1
   register: check_if_vagrant_installed

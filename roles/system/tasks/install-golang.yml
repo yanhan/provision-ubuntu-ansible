@@ -1,8 +1,10 @@
+---
 - name: Download Golang Binary Distribution
   get_url: url={{ golang_binary_targz_url }}
            dest={{ golang_binary_targz_fullpath }}
            sha256sum={{ golang_binary_targz_sha256sum }}
+           mode=0644
 
 - name: Install Go
-  shell: "tar -C /usr/local -xzf {{ golang_binary_targz_fullpath }}"
+  shell: "tar -C /usr/local -xzf {{ golang_binary_targz_fullpath }}"  # noqa command-instead-of-module
   become: yes

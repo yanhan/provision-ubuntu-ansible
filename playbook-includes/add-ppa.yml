@@ -27,6 +27,7 @@
 # ====================================
 # + ubuntu_version: something like 'trusty', 'precise', etc. In other words,
 #                   the code name for the Ubuntu version you're using.
+---
 - name: import GPG key for {{ name }} ppa
   apt_key: keyserver={{ keyserver }}
            id={{ key_fingerprint }}

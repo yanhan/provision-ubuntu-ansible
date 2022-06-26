@@ -1,3 +1,4 @@
+---
 - name: Check if minikube is installed
   shell: command -v minikube >/dev/null 2>&1
   ignore_errors: yes

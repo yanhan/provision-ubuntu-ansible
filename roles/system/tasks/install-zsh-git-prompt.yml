@@ -9,5 +9,5 @@
   register: check_if_zsh_git_prompt_repo_exists
 
 - name: Clone the zsh-git-prompt repo
-  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt  {{ zsh_git_prompt_repo_path }}"
+  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt  {{ zsh_git_prompt_repo_path }}"  # noqa command-instead-of-module
   when: check_if_zsh_git_prompt_repo_exists.rc != 0
