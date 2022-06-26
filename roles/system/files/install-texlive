@@ -5,7 +5,7 @@
 set -e
 
 cd /tmp
-rm -rf $(tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D')
+rm -rf "$(tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D')"
 
 # input that the installer script takes in.
 # It is a single line with an `i` character to tell the script to proceed with
@@ -15,7 +15,7 @@ i
 EOF
 
 tar xzf install-tl-unx.tar.gz
-cd $(tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D')
+cd "$(tar -tzf install-tl-unx.tar.gz | sed -e 'N;s/^\(.*\).*\n\1.*$/\1\n\1/;D')"
 # run the installation script, with stdin from `/tmp/installer-input`
 ./install-tl < ../installer-input
 ln -s /usr/local/texlive/2018/bin/* /opt/texbin

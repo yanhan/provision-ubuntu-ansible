@@ -51,6 +51,7 @@ EOF
   pyenv_venv_dir="$(pyenv root)/plugins/pyenv-virtualenv"
   if ! test -d "${pyenv_venv_dir}"; then
     git clone git://github.com/pyenv/pyenv-virtualenv "${pyenv_venv_dir}"
+    # shellcheck disable=SC2016
     echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
     eval "$(pyenv virtualenv-init -)"
   fi
@@ -100,7 +101,7 @@ pyenv deactivate
 pyenv global "${python_version}"
 
 # Install neovim-remote
-if [ 0 -eq "$(pip3 list --user | grep neovim-remote | wc -l)" ]; then
+if [ 0 -eq "$(pip3 list --user | grep -c neovim-remote)" ]; then
   pip3 install --user neovim-remote
 fi
 
