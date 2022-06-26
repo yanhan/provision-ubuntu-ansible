@@ -4,13 +4,13 @@ set -euo pipefail
 IFS=$'\n\t'
 
 main() {
-	set +u
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-	pyenv activate provision-ubuntu
-	set -u
+  set +u
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  pyenv activate provision-ubuntu
+  set -u
 
-	ansible-playbook -v -K -i inventory --tags install_texlive texlive.yml
+  ansible-playbook -v -K -i inventory --tags install_texlive texlive.yml
 }
 
 main "$@"

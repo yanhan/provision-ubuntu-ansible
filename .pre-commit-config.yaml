@@ -9,3 +9,12 @@ repos:
     rev: v6.3.0
     hooks:
       - id: ansible-lint
+  - repo: git@github.com:jumanjihouse/pre-commit-hooks
+    rev: 2.1.6
+    hooks:
+      - id: shfmt
+        args: ["-i", "2", "-sr"]
+        exclude: |
+          (?x)^(
+            roles/system/files/install-nvm-0.35.0.sh
+          )$
