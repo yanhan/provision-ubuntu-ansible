@@ -1,4 +1,31 @@
 ---
+- name: Set fact for asdf managed plugins and tools
+  ansible.builtin.set_fact:
+    asdf_plugins:
+      - name: kubectl
+        repo: https://github.com/Banno/asdf-kubectl.git
+        versions:
+          - 1.22.11
+          - 1.24.2
+        global: 1.22.11
+      - name: pre-commit
+        repo: https://github.com/jonathanmorley/asdf-pre-commit.git
+        versions:
+          - 2.19.0
+        global: 2.19.0
+      - name: shellcheck
+        repo: https://github.com/luizm/asdf-shellcheck.git
+        versions:
+          - 0.8.0
+        global: 0.8.0
+      - name: shfmt
+        repo: https://github.com/luizm/asdf-shfmt.git
+        versions:
+          - 3.5.1
+        global: 3.5.1
+  tags:
+    - asdf
+
 - name: Clone asdf repo
   ansible.builtin.git:
     repo: git@github.com:asdf-vm/asdf.git
@@ -6,3 +33,40 @@
     accept_newhostkey: yes
     update: no
     version: v0.10.2
+  tags:
+    - asdf
+
+- name: Add asdf plugins
+  ansible.builtin.shell: |
+    . "${HOME}"/.asdf/asdf.sh
+    if [[ "$(grep -c  "{{ item.name }}" <<< "$(asdf plugin list)")" -eq 0 ]]; then
+      asdf plugin add "{{ item.name }}" "{{ item.repo }}"
+    fi
+  args:
+    executable: /bin/bash
+  loop: "{{ asdf_plugins | flatten(levels=1) }}"
+  changed_when: False
+  tags:
+    - asdf
+
+- name: Install packages
+  ansible.builtin.shell: |
+    . "${HOME}"/.asdf/asdf.sh
+    if [[ "$(grep -c "{{ item.1 }}" <<< "$(asdf list "{{ item.0.name }}")")" -eq 0 ]]; then
+      asdf install "{{ item.0.name }}" "{{ item.1 }}"
+    fi
+  args:
+    executable: /bin/bash
+  loop: "{{ asdf_plugins | subelements('versions') }}"
+  changed_when: False
+  tags:
+    - asdf
+
+- name: Set global versions of packages
+  ansible.builtin.shell: |
+    . "${HOME}"/.asdf/asdf.sh
+    asdf global "{{ item.name }}" "{{ item.global }}"
+  args:
+    executable: /bin/bash
+  loop: "{{ asdf_plugins | flatten(levels=1) }}"
+  changed_when: False
