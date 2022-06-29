@@ -14,11 +14,6 @@
   tags:
     - asdf
 
-- name: Install Golang
-  include: install-golang.yml
-  tags:
-    - golang
-
 - name: Install ops tools
   include: install-ops-tools.yml
   tags:
