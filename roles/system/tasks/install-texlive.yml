@@ -28,11 +28,13 @@
 
 - name: install Chinese fonts
   ansible.builtin.shell: "rsync -avz {{ fonts_folder }} {{ home_fonts_path }} --log-file={{ rsync_fonts_log_file_path }} --log-file-format='%f'"  # noqa command-instead-of-module
+  changed_when: False
 
 - name: check if any new fonts are installed
   ansible.builtin.shell: "grep -q '\\.ttf$' {{ rsync_fonts_log_file_path }}"
   ignore_errors: true
   register: new_fonts_installed
+  changed_when: False
 
 - name: run `fc-cache -rv` when new fonts are installed
   ansible.builtin.shell: fc-cache -rv
@@ -54,6 +56,7 @@
   ansible.builtin.shell: dpkg -s texlive-local
   ignore_errors: True
   register: texlive_installed
+  changed_when: False
 
 - name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
   ansible.builtin.shell: "{{ texlive_uninstall_script_path }}"

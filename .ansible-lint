@@ -3,4 +3,3 @@ skip_list:
   - command-instead-of-shell
   - git-latest
   - ignore-errors
-  - no-changed-when
