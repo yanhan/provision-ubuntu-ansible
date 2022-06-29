@@ -1,6 +1,6 @@
 ---
 - name: Clone asdf repo
-  git:
+  ansible.builtin.git:
     repo: git@github.com:asdf-vm/asdf.git
     dest: "{{ ansible_env.HOME }}/.asdf"
     accept_newhostkey: yes

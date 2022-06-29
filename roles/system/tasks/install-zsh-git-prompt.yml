@@ -1,6 +1,6 @@
 ---
 - name: Clone zsh-git-prompt repo
-  git:
+  ansible.builtin.git:
     repo: git@github.com:olivierverdier/zsh-git-prompt.git
     dest: "{{ zsh_git_prompt_repo_path }}"
     accept_newhostkey: yes

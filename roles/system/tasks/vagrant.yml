@@ -1,6 +1,6 @@
 ---
 - name: Check if vagrant is installed
-  shell: command -v vagrant >/dev/null 2>&1
+  ansible.builtin.shell: command -v vagrant >/dev/null 2>&1
   register: check_if_vagrant_installed
   ignore_errors: true
   changed_when: false
@@ -14,7 +14,7 @@
   tags: vagrant
 
 - name: Get output of lsb_release -cs
-  shell: lsb_release -cs
+  ansible.builtin.shell: lsb_release -cs
   when: check_if_vagrant_installed.rc != 0
   register: lsb_release_cs
   tags: vagrant

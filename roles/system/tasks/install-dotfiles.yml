@@ -1,13 +1,13 @@
 ---
 - name: clone oh my zsh repository
-  git:
+  ansible.builtin.git:
     repo: git@github.com:robbyrussell/oh-my-zsh.git
     dest: ~/.oh-my-zsh
     accept_newhostkey: yes
     update: no
 
 - name: clone dotfiles repository
-  git:
+  ansible.builtin.git:
     repo: git@github.com:yanhan/dotfiles.git
     dest: "{{ dotfiles_repo_path }}"
     accept_newhostkey: yes
@@ -17,7 +17,7 @@
     - dotfiles
 
 - name: Ensure ${HOME}/.vim/autoload exists
-  file:
+  ansible.builtin.file:
     path: "{{ home_path }}/.vim/autoload"
     state: directory
     mode: 0750

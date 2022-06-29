@@ -1,14 +1,14 @@
 # Installs TeXLive
 ---
 - name: Download debian-equivs template file
-  get_url:
+  ansible.builtin.get_url:
     url: "https://www.tug.org/texlive/files/debian-equivs-2018-ex.txt"
     dest: "{{ texlive_equivs_file_path }}"
     sha256sum: "26b9f61431749c342c32b469104eb44ffefaee6c51697323aec12e07e3980b06"
     mode: 0644
 
 - name: Download texlive installer
-  get_url:
+  ansible.builtin.get_url:
     url: "http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
     dest: "{{ texlive_unix_installer_gz_path }}"
     sha256sum: "bcd53189996e145b210d9dc71e410ff748e8a597b91e46c982fdde4b393f8aef"
@@ -16,25 +16,26 @@
 
 # we do this because we're gonna install TeXLive manually
 - name: remove tex-common
-  apt: name=tex-common
-       state=absent
+  ansible.builtin.apt:
+    name: tex-common
+    state: absent
   become: yes
 
 - name: remove Chinese fonts installation log file
-  file:
+  ansible.builtin.file:
     path: "{{ rsync_fonts_log_file_path }}"
     state: absent
 
 - name: install Chinese fonts
-  shell: "rsync -avz {{ fonts_folder }} {{ home_fonts_path }} --log-file={{ rsync_fonts_log_file_path }} --log-file-format='%f'"  # noqa command-instead-of-module
+  ansible.builtin.shell: "rsync -avz {{ fonts_folder }} {{ home_fonts_path }} --log-file={{ rsync_fonts_log_file_path }} --log-file-format='%f'"  # noqa command-instead-of-module
 
 - name: check if any new fonts are installed
-  shell: "grep -q '\\.ttf$' {{ rsync_fonts_log_file_path }}"
+  ansible.builtin.shell: "grep -q '\\.ttf$' {{ rsync_fonts_log_file_path }}"
   ignore_errors: true
   register: new_fonts_installed
 
 - name: run `fc-cache -rv` when new fonts are installed
-  shell: fc-cache -rv
+  ansible.builtin.shell: fc-cache -rv
   when: new_fonts_installed.rc == 0
 
 
@@ -43,37 +44,38 @@
 
 # for texlive-local fake package
 - name: install equivs
-  apt: name=equivs
-       state=present
-       install_recommends=no
+  ansible.builtin.apt:
+    name: equivs
+    state: present
+    install_recommends: no
   become: yes
 
 - name: check if TeXLive is installed
-  shell: dpkg -s texlive-local
+  ansible.builtin.shell: dpkg -s texlive-local
   ignore_errors: True
   register: texlive_installed
 
 - name: run TeXLive uninstall script for cleanup (when TeXLive isn't installed)
-  shell: "{{ texlive_uninstall_script_path }}"
+  ansible.builtin.shell: "{{ texlive_uninstall_script_path }}"
   ignore_errors: True
   become: yes
   when: texlive_installed.rc != 0
 
 - name: copy TeXLive installer to /tmp
-  shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
+  ansible.builtin.shell: "cp {{ texlive_unix_installer_gz_path }} /tmp"
   when: texlive_installed.rc != 0
 
 - name: install TeXLive
-  shell: "{{ texlive_install_script_path }}"
+  ansible.builtin.shell: "{{ texlive_install_script_path }}"
   become: yes
   when: texlive_installed.rc != 0
 
 - name: prepend TeXLive bin path to PATH env var in /etc/environment
-  shell: "{{ texlive_update_etc_environment_script_path }}"
+  ansible.builtin.shell: "{{ texlive_update_etc_environment_script_path }}"
   become: yes
   when: texlive_installed.rc != 0
 
 - name: install fake TeXLive package
-  shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2018-1_all.deb"
+  ansible.builtin.shell: "cp {{ texlive_equivs_file_path }} /tmp/tl-equivs/texlive-local && cd /tmp/tl-equivs && equivs-build texlive-local && dpkg -i texlive-local_2018-1_all.deb"
   become: yes
   when: texlive_installed.rc != 0

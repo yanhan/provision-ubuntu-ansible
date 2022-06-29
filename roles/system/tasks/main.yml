@@ -29,7 +29,7 @@
   include: vagrant.yml
 
 - name: Install lock-screen script
-  copy:
+  ansible.builtin.copy:
     src: "lock-screen"
     dest: "/usr/local/bin/lock-screen"
     owner: "root"
@@ -38,7 +38,7 @@
   become: yes
 
 - name: Disable cups on system startup
-  systemd:
+  ansible.builtin.systemd:
     name: cups.service
     enabled: no
   become: yes
