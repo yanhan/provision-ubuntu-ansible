@@ -25,10 +25,6 @@
 - name: Install global npm packages
   include: npm-packages.yml
 
-- name: Install minikube
-  include: install-minikube.yml
-  tags: minikube
-
 - name: Install vagrant
   include: vagrant.yml
 
