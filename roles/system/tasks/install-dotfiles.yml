@@ -52,16 +52,3 @@
     path: "{{ home_path }}/.vim/autoload"
     state: directory
     mode: 0750
-
-- name: Install vim-plug
-  copy:
-    src: plug.vim
-    dest: "{{ home_path }}/.vim/autoload/plug.vim"
-    mode: 0750
-  register: just_installed_vim_plug
-
-- name: Install Vim plugins
-  shell: vim +PlugInstall +qall
-  when: just_installed_vim_plug.changed
-  tags:
-    - skip_ansible_lint
