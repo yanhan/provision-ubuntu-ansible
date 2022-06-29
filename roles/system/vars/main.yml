@@ -29,6 +29,7 @@ texlive_unix_installer_gz_path: "{{ repo_files_path }}/{{ texlive_unix_installer
 texlive_equivs_file_path: "{{ repo_files_path }}/debian-equivs-2018-ex.txt"
 texlive_update_etc_environment_script_path: "{{ repo_files_path }}/texlive-update-etc-environment"
 texlive_uninstall_script_path: "{{ repo_files_path }}/uninstall-texlive"
+zsh_git_prompt_repo_path: "{{ code_dir_path }}/zsh-git-prompt"
 
 vagrant_2_2_6:
   url: "https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_linux_amd64.zip"

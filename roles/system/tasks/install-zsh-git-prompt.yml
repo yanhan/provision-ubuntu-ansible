@@ -1,13 +1,7 @@
 ---
-- name: Add variable to store path to zsh-git-prompt repo
-  set_fact:
-    zsh_git_prompt_repo_path: "{{ code_dir_path }}/zsh-git-prompt"
-
-- name: Check if the zsh-git-prompt repo exists
-  shell: "test -d {{ zsh_git_prompt_repo_path }}"
-  ignore_errors: True
-  register: check_if_zsh_git_prompt_repo_exists
-
-- name: Clone the zsh-git-prompt repo
-  shell: "git clone https://github.com/olivierverdier/zsh-git-prompt  {{ zsh_git_prompt_repo_path }}"  # noqa command-instead-of-module
-  when: check_if_zsh_git_prompt_repo_exists.rc != 0
+- name: Clone zsh-git-prompt repo
+  git:
+    repo: git@github.com:olivierverdier/zsh-git-prompt.git
+    dest: "{{ zsh_git_prompt_repo_path }}"
+    accept_newhostkey: yes
+    update: no
