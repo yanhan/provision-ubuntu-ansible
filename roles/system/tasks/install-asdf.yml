@@ -14,6 +14,12 @@
           - 1.22.11
           - 1.24.2
         global: 1.22.11
+      - name: minikube
+        repo: https://github.com/alvarobp/asdf-minikube.git
+        versions:
+          - 1.24.0
+          - 1.26.0
+        global: 1.26.0
       - name: pre-commit
         repo: https://github.com/jonathanmorley/asdf-pre-commit.git
         versions:
