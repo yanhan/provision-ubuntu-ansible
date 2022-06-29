@@ -1,18 +1,10 @@
 ---
-- name: check if oh my zsh is installed
-  shell: test -d .oh-my-zsh
-  args:
-    chdir: "{{ home_path }}"
-  register: oh_my_zsh_installed
-  ignore_errors: true
-
 - name: clone oh my zsh repository
-  shell: >
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh &&
-      cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  when: oh_my_zsh_installed.rc != 0
-  tags:
-    - skip_ansible_lint
+  git:
+    repo: git@github.com:robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+    accept_newhostkey: yes
+    update: no
 
 - name: check if dotfiles git repository exists
   shell: test -d dotfiles
