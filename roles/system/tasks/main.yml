@@ -4,6 +4,9 @@
   tags:
     - ubuntu
 
+- name: Install zsh-git-prompt
+  include: install-zsh-git-prompt.yml
+
 - include: install-dotfiles.yml
 
 - name: Install asdf
@@ -20,9 +23,6 @@
   include: install-ops-tools.yml
   tags:
     - ops
-
-- name: Install zsh-git-prompt
-  include: install-zsh-git-prompt.yml
 
 - name: Install nvm
   include: nvm.yml
