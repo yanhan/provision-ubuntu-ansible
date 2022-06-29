@@ -2,8 +2,6 @@
 skip_list:
   - command-instead-of-shell
   - fqcn-builtins
+  - git-latest
   - ignore-errors
   - no-changed-when
-
-warn_list:
-  - git-latest

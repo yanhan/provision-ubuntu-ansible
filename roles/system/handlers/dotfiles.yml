@@ -1,0 +1,7 @@
+---
+- name: setup dotfiles repository
+  shell: python setup_home_folder_dotfiles.py gitconfig tmux.conf vimrc zshrc
+  args:
+    chdir: "{{ dotfiles_repo_path }}"
+  tags:
+    - dotfiles
