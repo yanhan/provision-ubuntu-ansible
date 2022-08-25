@@ -13,6 +13,11 @@
           - 1.17.11
           - 1.18.3
         global: 1.18.3
+      - name: helm
+        repo: https://github.com/Antiarchitect/asdf-helm.git
+        versions:
+          - 3.9.4
+        global: 3.9.4
       - name: kubectl
         repo: https://github.com/Banno/asdf-kubectl.git
         versions:
