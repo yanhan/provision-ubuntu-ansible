@@ -5,6 +5,8 @@
     dest: ~/.oh-my-zsh
     accept_newhostkey: yes
     update: no
+  tags:
+    - dotfiles
 
 - name: clone dotfiles repository
   ansible.builtin.git:
@@ -21,6 +23,8 @@
     path: "{{ home_path }}/.vim/autoload"
     state: directory
     mode: 0750
+  tags:
+    - dotfiles
 
 - name: Ensure tmux plugins dir exists
   ansible.builtin.file:
