@@ -36,11 +36,6 @@
     keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
   become: yes
 
-- name: Add k8s apt repository (for kubectl)
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
-  become: yes
-
 - name: Add docker apt key
   ansible.builtin.apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
@@ -121,7 +116,6 @@
       - ipcalc
       - jq
       - keepass2
-      - kubectl
       - libbz2-dev
       - libcurl4-openssl-dev
       - libexpat1-dev
