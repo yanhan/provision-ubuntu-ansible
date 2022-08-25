@@ -17,8 +17,9 @@
         repo: https://github.com/Banno/asdf-kubectl.git
         versions:
           - 1.22.11
+          - 1.23.10
           - 1.24.2
-        global: 1.22.11
+        global: 1.23.10
       - name: minikube
         repo: https://github.com/alvarobp/asdf-minikube.git
         versions:
