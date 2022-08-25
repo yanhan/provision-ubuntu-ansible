@@ -93,3 +93,5 @@
     executable: /bin/bash
   loop: "{{ asdf_plugins | flatten(levels=1) }}"
   changed_when: False
+  tags:
+    - asdf
