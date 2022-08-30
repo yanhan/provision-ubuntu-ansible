@@ -40,7 +40,15 @@ This file is necessary for installing the dotfiles; it is used for changing the 
 
 ## Run
 
-    ./run
+```
+./run
+```
+
+If the path to your home directory is different from the value of the `home_path` variable in `roles/system/vars/main.yml`, run with:
+
+```
+./run --extra-vars home_path=/path/to/your/home/dir
+```
 
 ## License
 
