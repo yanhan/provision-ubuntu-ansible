@@ -30,13 +30,6 @@ Open the `localhost.yml` file.
 
 Edit the value of the `user` variable to your actual username.
 
-#### ansible/roles/system/files/password.txt
-
-In the `ansible/roles/system/files/password.txt`, there should be a single line containing the password of your current user.
-
-Note that this file is `.gitignore`d.
-
-This file is necessary for installing the dotfiles; it is used for changing the shell of the current user to zsh.
 
 ## Run
 
