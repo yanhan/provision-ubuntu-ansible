@@ -1,6 +1,6 @@
 ---
 - name: Check if nvm is installed
-  ansible.builtin.shell: "NVM_DIR=\"{{ nvm_dir }}\" source \"${NVM_DIR}\"/nvm.sh && command -v nvm >/dev/null 2>&1"
+  ansible.builtin.shell: "NVM_DIR=\"{{ nvm_dir }}\" && source \"${NVM_DIR}\"/nvm.sh && command -v nvm >/dev/null 2>&1"
   args:
     executable: /bin/bash
   register: check_nvm_installed
