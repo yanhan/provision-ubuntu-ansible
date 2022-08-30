@@ -79,15 +79,26 @@
   become: yes
 
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
-  check_if_need_to_apt_get_update: cache_valid_time=86400
-                                   nr_lines_with_sg_mirror_in_apt_sources={{ nr_lines_with_sg_mirror_in_apt_sources.stdout }}
+  ansible.builtin.shell: |
+    set -euo pipefail
+    last_update="$(stat /var/cache/apt/pkgcache.bin | grep -Po '^Access: \K\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}')"
+    last_update_ts="$(date +%s -d "${last_update}")"
+    ts_now="$(date +%s)"
+    if [ "$(( ${ts_now} - ${last_update_ts} ))" -gt 86400 ]; then
+      echo "please update"
+    else
+      echo "up to date"
+    fi
+  args:
+    executable: /bin/bash
   register: ag_update
   become: yes
+  changed_when: False
 
 - name: apt-get update
   ansible.builtin.apt:
     update_cache: yes
-  when: ag_update.need_to_update
+  when: ag_update.stdout == "please update"
   become: yes
 
 - name: List the packages to install
