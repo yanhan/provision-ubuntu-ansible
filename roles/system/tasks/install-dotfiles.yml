@@ -1,7 +1,7 @@
 ---
 - name: clone oh my zsh repository
   ansible.builtin.git:
-    repo: git@github.com:robbyrussell/oh-my-zsh.git
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: ~/.oh-my-zsh
     accept_newhostkey: yes
     update: no
@@ -10,7 +10,7 @@
 
 - name: clone dotfiles repository
   ansible.builtin.git:
-    repo: git@github.com:yanhan/dotfiles.git
+    repo: https://github.com/yanhan/dotfiles.git
     dest: "{{ dotfiles_repo_path }}"
     accept_newhostkey: yes
     update: no
@@ -36,7 +36,7 @@
 
 - name: clone tmux plugins manager repository
   ansible.builtin.git:
-    repo: git@github.com:tmux-plugins/tpm.git
+    repo: https://github.com/tmux-plugins/tpm.git
     dest: "{{ home_path }}/.tmux/plugins/tpm"
     accept_newhostkey: yes
     update: no
