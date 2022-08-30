@@ -2,15 +2,16 @@
 
 Provisions my Ubuntu Linux system using Ansible
 
+
 ## Setup
 
-### Preliminaries
+This repo should be cloned to your `~/code/provision-ubuntu-ansible` directory, like so:
 
-Follow the instructions here to generate an SSH key and add it to your github account:
+```
+git clone https://github.com/yanhan/provision-ubuntu-ansible.git ~/code/provision-ubuntu-ansible
+```
 
-    https://help.github.com/articles/generating-ssh-keys/
-
-This is for cloning the [dotfiles](https://github.com/yanhan/dotfiles) repo.
+It also assumes that you have cloned the dotfiles repo (https://github.com/yanhan/dotfiles) to `~/dotfiles`.
 
 ### Configuring the repository
 
@@ -18,11 +19,7 @@ This is for cloning the [dotfiles](https://github.com/yanhan/dotfiles) repo.
 
 Open the `roles/system/vars/main.yml` file.
 
-Edit the value of the `home_path` variable to the absolute path of your `$HOME`.
-
-Edit the value of the `repo_files_path` variable to the absolute path of the `roles/system/files` folder in this repository.
-
-Edit the `dotfiles_repo_path` variable to the absolute path of the [dotfiles repository](https://github.com/yanhan/dotfiles).
+Edit the value of the `home_path` variable to the absolute path of your `$HOME` (check out the `Run` section for an alternative to this).
 
 #### ansible/localhost.yml
 
@@ -42,6 +39,7 @@ If the path to your home directory is different from the value of the `home_path
 ```
 ./run --extra-vars home_path=/path/to/your/home/dir
 ```
+
 
 ## License
 
