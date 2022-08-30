@@ -102,7 +102,7 @@ cat <<- EOF
 Please run the following commands to complete the setup:
 
     exec "\${SHELL}"
-    chsh --shell /bin/zsh yh
+    chsh --shell /bin/zsh $(whoami)
 
 After setting your iptables rules, run:
 
