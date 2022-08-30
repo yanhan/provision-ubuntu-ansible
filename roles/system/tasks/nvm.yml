@@ -20,7 +20,8 @@
   when: check_nvm_installed.rc != 0
 
 - name: Install nodejs 16.14.2 using nvm
-  ansible.builtin.shell: "NVM_DIR=\"{{ ansible_env.HOME }}\"/.nvm source \"${NVM_DIR}\"/nvm.sh &&  nvm install 16.14.2"
+  ansible.builtin.shell: |
+    NVM_DIR="{{ ansible_env.HOME }}/.nvm" && source "${NVM_DIR}"/nvm.sh && nvm install 16.14.2
   args:
     executable: /bin/bash
   changed_when: False
