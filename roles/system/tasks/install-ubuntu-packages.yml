@@ -1,11 +1,15 @@
 ---
 - name: check {{ apt_sources_list }} to see if sg mirror is used
   ansible.builtin.shell: "set -o pipefail && cat {{ apt_sources_list }} | perl -ne 'print if /^(deb|deb-src) http:\\/\\/sg.archive.ubuntu.com/' | wc -l"
+  args:
+    executable: /bin/bash
   register: nr_lines_with_sg_mirror_in_apt_sources
   changed_when: False
 
 - name: replace {{ apt_sg_mirror }} mirrors with {{ apt_osuosl_mirror }} mirror
   ansible.builtin.shell: perl -pi -e 's#^(deb|deb-src) {{ apt_sg_mirror }}#\1 {{ apt_osuosl_mirror }}#' /etc/apt/sources.list
+  args:
+    executable: /bin/bash
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0  # noqa risky-shell-pipe
 
 - name: Add virtualbox key

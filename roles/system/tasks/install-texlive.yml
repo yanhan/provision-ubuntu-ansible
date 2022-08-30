@@ -28,10 +28,14 @@
 
 - name: install Chinese fonts
   ansible.builtin.shell: "rsync -avz {{ fonts_folder }} {{ home_fonts_path }} --log-file={{ rsync_fonts_log_file_path }} --log-file-format='%f'"  # noqa command-instead-of-module
+  args:
+    executable: /bin/bash
   changed_when: False
 
 - name: check if any new fonts are installed
   ansible.builtin.shell: "grep -q '\\.ttf$' {{ rsync_fonts_log_file_path }}"
+  args:
+    executable: /bin/bash
   ignore_errors: true
   register: new_fonts_installed
   changed_when: False
