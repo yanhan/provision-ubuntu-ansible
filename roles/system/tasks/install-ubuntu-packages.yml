@@ -21,7 +21,7 @@
 
 - name: Add virtualbox apt repository
   ansible.builtin.apt_repository:
-    repo: "deb https://download.virtualbox.org/virtualbox/debian bionic contrib"
+    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian focal contrib"
   register: add_vbox_apt_repo
   become: yes
 
@@ -178,7 +178,7 @@
       - tmux
       - unzip
       - vim
-      - virtualbox-6.0
+      - virtualbox-6.1
       - vlc
       - xchm
       - xclip
