@@ -8,4 +8,5 @@
   community.general.npm:
     name: "{{ item }}"
     global: yes
+    executable: "{{ nvm_dir }}/versions/node/{{ nvm_version }}/bin/npm"
   with_items: "{{ global_npm_packages }}"
