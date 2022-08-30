@@ -21,12 +21,6 @@ Open the `roles/system/vars/main.yml` file.
 
 Edit the value of the `home_path` variable to the absolute path of your `$HOME` (check out the `Run` section for an alternative to this).
 
-#### ansible/localhost.yml
-
-Open the `localhost.yml` file.
-
-Edit the value of the `user` variable to your actual username.
-
 
 ## Run
 
