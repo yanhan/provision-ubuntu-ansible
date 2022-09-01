@@ -5,8 +5,14 @@
       - jsonlint
 
 - name: Install global npm packages
-  community.general.npm:
-    name: "{{ item }}"
-    global: yes
-    executable: "{{ nvm_dir }}/versions/node/{{ nodejs_version }}/bin/npm"
-  with_items: "{{ global_npm_packages }}"
+  ansible.builtin.shell: |
+    export NVM_DIR="${HOME}"/.nvm
+    [ -s "${NVM_DIR}"/nvm.sh ] && source "${NVM_DIR}"/nvm.sh
+    nvm use {{ nodejs_version }}
+    npm install -g {{ item }}
+  args:
+    executable: /bin/bash
+  # technically changed_when false is false sometimes; we just add it to
+  # appease ansible-lint
+  changed_when: false
+  loop: "{{ global_npm_packages }}"
