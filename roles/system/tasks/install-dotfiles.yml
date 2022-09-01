@@ -40,6 +40,25 @@
     dest: "{{ home_path }}/.tmux/plugins/tpm"
     accept_newhostkey: yes
     update: no
+  tags:
+    - dotfiles
+
+- name: Compare init.vim contents
+  ansible.builtin.shell: |
+    diff -q {{ home_path }}/dotfiles/init.vim {{ home_path }}/.config/nvim/init.vim
+  args:
+    executable: /bin/bash
+  register: init_vim_diff
+  changed_when: false
+  ignore_errors: true
+  tags:
+    - dotfiles
+
+- name: Notify setup dotfiles handler if needed
+  ansible.builtin.debug:
+    var: init_vim_diff
   notify: setup dotfiles repository
+  changed_when: true
+  when: init_vim_diff.rc != 0
   tags:
     - dotfiles
