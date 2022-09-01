@@ -34,6 +34,14 @@ if [ "${#prereqs_to_install[@]}" -gt 0 ]; then
   sudo apt install -y "${prereqs_to_install[@]}"
 fi
 
+if [ -d ~/.pyenv ]; then
+  if [ "${PYENV_ROOT}" = "" ]; then
+    export PYENV_ROOT="${HOME}"/.pyenv
+    export PATH="${PYENV_ROOT}/bin:${PATH}"
+  fi
+  eval "$(pyenv init -)"
+fi
+
 if ! command -v pyenv > /dev/null 2>&1; then
   git clone https://github.com/pyenv/pyenv.git ~/.pyenv
   cat >> ~/.bashrc <<- EOF
@@ -47,14 +55,14 @@ EOF
   export PYENV_ROOT="${HOME}"/.pyenv
   export PATH="${PYENV_ROOT}/bin:${PATH}"
   eval "$(pyenv init -)"
+fi
 
-  pyenv_venv_dir="$(pyenv root)/plugins/pyenv-virtualenv"
-  if ! test -d "${pyenv_venv_dir}"; then
-    git clone https://github.com/pyenv/pyenv-virtualenv.git "${pyenv_venv_dir}"
-    # shellcheck disable=SC2016
-    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-    eval "$(pyenv virtualenv-init -)"
-  fi
+pyenv_venv_dir="$(pyenv root)/plugins/pyenv-virtualenv"
+if ! test -d "${pyenv_venv_dir}"; then
+  git clone https://github.com/pyenv/pyenv-virtualenv.git "${pyenv_venv_dir}"
+  # shellcheck disable=SC2016
+  echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+  eval "$(pyenv virtualenv-init -)"
 fi
 
 readonly python_version=3.10.4
