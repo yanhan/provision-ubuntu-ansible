@@ -2,11 +2,11 @@
 - name: Clone tfenv repo
   ansible.builtin.git:
     repo: https://github.com/tfutils/tfenv.git
-    dest: "{{ ansible_env.HOME }}/.tfenv"
+    dest: "{{ home_path }}/.tfenv"
     update: no
 
 - name: Clone tgenv repo
   ansible.builtin.git:
     repo: https://github.com/cunymatthieu/tgenv.git
-    dest: "{{ ansible_env.HOME }}/.tgenv"
+    dest: "{{ home_path }}/.tgenv"
     update: no

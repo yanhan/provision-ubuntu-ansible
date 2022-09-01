@@ -62,7 +62,7 @@
 - name: Clone asdf repo
   ansible.builtin.git:
     repo: https://github.com/asdf-vm/asdf.git
-    dest: "{{ ansible_env.HOME }}/.asdf"
+    dest: "{{ home_path }}/.asdf"
     accept_newhostkey: yes
     update: no
     version: v0.10.2
