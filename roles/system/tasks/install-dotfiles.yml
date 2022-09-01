@@ -45,7 +45,7 @@
 
 - name: Compare init.vim contents
   ansible.builtin.shell: |
-    diff -q {{ home_path }}/dotfiles/init.vim {{ home_path }}/.config/nvim/init.vim
+    diff -q {{ home_path }}/dotfiles/templates/init.vim {{ home_path }}/.config/nvim/init.vim
   args:
     executable: /bin/bash
   register: init_vim_diff
