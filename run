@@ -86,7 +86,7 @@ fi
 pyenv activate "${venv_name}"
 
 pip install -r requirements.txt
-ansible-playbook -v -K -i inventory "$@" localhost.yml
+ansible-playbook -v -K -i inventory -e home_path="${HOME}" "$@" localhost.yml
 pyenv deactivate
 
 # Set global python version
