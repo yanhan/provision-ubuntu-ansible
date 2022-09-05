@@ -18,6 +18,11 @@
         versions:
           - 3.9.4
         global: 3.9.4
+      - name: jb
+        repo: https://github.com/beardix/asdf-jb.git
+        versions:
+          - 0.5.1
+        global: 0.5.1
       - name: kind
         repo: https://github.com/johnlayton/asdf-kind.git
         versions:
@@ -56,6 +61,11 @@
         versions:
           - 3.5.1
         global: 3.5.1
+      - name: tanka
+        repo: https://github.com/trotttrotttrott/asdf-tanka.git
+        versions:
+          - 0.22.1
+        global: 0.22.1
   tags:
     - asdf
 
