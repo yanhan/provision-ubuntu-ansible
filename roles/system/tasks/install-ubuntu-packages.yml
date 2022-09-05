@@ -88,6 +88,12 @@
   register: add_gitcore_ppa
   become: yes
 
+- name: Add neovim ppa
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/stable
+  register: add_neovim_ppa
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   ansible.builtin.shell: |
     set -euo pipefail
@@ -108,7 +114,7 @@
 - name: apt-get update
   ansible.builtin.apt:
     update_cache: yes
-  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed  # noqa no-handler
+  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed or add_neovim_ppa.changed  # noqa no-handler
   become: yes
 
 - name: List the packages to install
