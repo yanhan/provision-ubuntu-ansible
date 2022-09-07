@@ -13,6 +13,11 @@
           - 1.17.11
           - 1.18.3
         global: 1.18.3
+      - name: gomplate
+        repo: https://github.com/sneakybeaky/asdf-gomplate.git
+        versions:
+          - v3.11.2
+        global: v3.11.2
       - name: helm
         repo: https://github.com/Antiarchitect/asdf-helm.git
         versions:
