@@ -1,6 +1,6 @@
 # provision-ubuntu
 
-Provisions my Ubuntu Linux system using Ansible
+Provisions my Ubuntu Linux and Mac systems using Ansible
 
 
 ## Setup
