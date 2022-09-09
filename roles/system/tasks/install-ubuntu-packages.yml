@@ -12,6 +12,11 @@
     executable: /bin/bash
   when: nr_lines_with_sg_mirror_in_apt_sources.stdout | int > 0  # noqa risky-shell-pipe
 
+- name: Get output of lsb_release -cs
+  ansible.builtin.shell: lsb_release -cs
+  register: lsb_release_cs
+  changed_when: False
+
 - name: Add virtualbox key
   ansible.builtin.apt_key:
     file: "{{ repo_files_path }}/oracle_vbox_2016.asc"
@@ -52,15 +57,22 @@
   register: add_docker_apt_key
   become: yes
 
-- name: Get output of lsb_release -cs
-  ansible.builtin.shell: lsb_release -cs
-  register: lsb_release_cs
-  changed_when: False
-
 - name: Add docker apt repository
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release_cs.stdout }} stable"
   register: add_docker_apt_repo
+  become: yes
+
+- name: Add Hashicorp apt key
+  ansible.builtin.apt_key:
+    url: "https://apt.releases.hashicorp.com/gpg"
+  register: add_hashicorp_apt_key
+  become: yes
+
+- name: Add Hashicorp apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release_cs.stdout }} main"
+  register: add_hashicorp_apt_repo
   become: yes
 
 # Refer to https://code.visualstudio.com/docs/setup/linux?msclkid=1ac46317bc6411ecb47fb8ff0f8c2151
@@ -114,7 +126,7 @@
 - name: apt-get update
   ansible.builtin.apt:
     update_cache: yes
-  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed or add_neovim_ppa.changed  # noqa no-handler
+  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_hashicorp_apt_key.changed or add_hashicorp_apt_repo.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed or add_neovim_ppa.changed  # noqa no-handler
   become: yes
 
 - name: List the packages to install
@@ -183,6 +195,7 @@
       - tk8.6-dev
       - tmux
       - unzip
+      - vagrant
       - vim
       - virtualbox-6.1
       - vlc
