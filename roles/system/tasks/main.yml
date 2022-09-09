@@ -1,9 +1,4 @@
 ---
-- name: Install Ubuntu packages
-  include: install-ubuntu-packages.yml
-  tags:
-    - ubuntu
-
 - name: Install zsh-git-prompt
   include: install-zsh-git-prompt.yml
 
@@ -24,23 +19,3 @@
 
 - name: Install global npm packages
   include: npm-packages.yml
-
-- name: Install lock-screen script
-  ansible.builtin.copy:
-    src: "lock-screen"
-    dest: "/usr/local/bin/lock-screen"
-    owner: "root"
-    group: "root"
-    mode: "0755"
-  become: yes
-
-- name: Disable cups on system startup
-  ansible.builtin.systemd:
-    name: cups.service
-    enabled: no
-  become: yes
-  ignore_errors: yes
-
-- name: Install texlive
-  include: install-texlive.yml
-  tags: ["never", "install_texlive"]

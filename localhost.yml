@@ -1,5 +1,21 @@
 ---
 - hosts: 127.0.0.1
   connection: local
+  pre_tasks:
+    - name: Get OS
+      shell: uname
+      args:
+        executable: /bin/bash
+      register: get_os
   roles:
-  - system
+    - role: ubuntu-packages
+      when: get_os.stdout == "Linux"
+    - role: mac-packages
+      when: get_os.stdout == "Darwin"
+    - role: system
+    - role: ubuntu-misc
+      when: get_os.stdout == "Linux"
+    - role: texlive
+      tags:
+        - never
+        - install_texlive

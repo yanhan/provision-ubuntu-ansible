@@ -2,36 +2,53 @@
 
 set -e
 
-retcode=0
+os_name="$(uname)"
 
-readonly prereqs=(
-  gcc
-  git
-  libbz2-dev
-  libffi-dev
-  libreadline-dev
-  libsqlite3-dev
-  libssl-dev
-  make
-  # TODO: Is python-dev required?
-  #python-dev
-  zlib1g-dev
-)
+install_ubuntu_packages() {
+  local retcode=0
 
-prereqs_to_install=()
+  declare -r prereqs=(
+    gcc
+    git
+    libbz2-dev
+    libffi-dev
+    libreadline-dev
+    libsqlite3-dev
+    libssl-dev
+    make
+    # TODO: Is python-dev required?
+    #python-dev
+    zlib1g-dev
+  )
 
-for pkg in "${prereqs[@]}"; do
-  set +e
-  dpkg -s "${pkg}" > /dev/null 2>&1
-  retcode=${?}
-  set -e
-  if [ "${retcode}" -ne 0 ]; then
-    prereqs_to_install+=("${pkg}")
+  local prereqs_to_install=()
+  local pkg
+
+  for pkg in "${prereqs[@]}"; do
+    set +e
+    dpkg -s "${pkg}" > /dev/null 2>&1
+    retcode=${?}
+    set -e
+    if [ "${retcode}" -ne 0 ]; then
+      prereqs_to_install+=("${pkg}")
+    fi
+  done
+
+  if [ "${#prereqs_to_install[@]}" -gt 0 ]; then
+    sudo apt install -y "${prereqs_to_install[@]}"
   fi
-done
+}
 
-if [ "${#prereqs_to_install[@]}" -gt 0 ]; then
-  sudo apt install -y "${prereqs_to_install[@]}"
+install_homebrew() {
+  if ! command -v brew > /dev/null 2>&1; then
+    ./install-homebrew.sh
+  fi
+}
+
+if [ "${os_name}" = "Linux" ]; then
+  install_ubuntu_packages
+elif [ "${os_name}" = "Darwin" ]; then
+  install_homebrew
 fi
 
 if [ -d ~/.pyenv ]; then
@@ -116,8 +133,13 @@ Please run the following commands to complete the setup:
     exec "\${SHELL}"
     chsh --shell /bin/zsh $(whoami)
 
+EOF
+
+if [ "${os_name}" = "Linux" ]; then
+  cat <<- EOF
 After setting your iptables rules, run:
 
     sudo dpkg-reconfigure iptables-persistent
 
 EOF
+fi

@@ -19,7 +19,7 @@
 
 - name: Add virtualbox key
   ansible.builtin.apt_key:
-    file: "{{ repo_files_path }}/oracle_vbox_2016.asc"
+    file: "{{ ubuntu_packages_files_path }}/oracle_vbox_2016.asc"
     id: "B9F8D658297AF3EFC18D5CDFA2F683C52980AECF"
   register: add_vbox_apt_key
   become: yes
@@ -32,7 +32,7 @@
 
 - name: Add sublime text apt key
   ansible.builtin.apt_key:
-    file: "{{ repo_files_path }}/sublimehq-pub.gpg"
+    file: "{{ ubuntu_packages_files_path }}/sublimehq-pub.gpg"
     id: "1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A"
   register: add_subl_apt_key
   become: yes
@@ -78,7 +78,7 @@
 # Refer to https://code.visualstudio.com/docs/setup/linux?msclkid=1ac46317bc6411ecb47fb8ff0f8c2151
 - name: Add Microsoft packages apt key
   ansible.builtin.apt_key:
-    file: "{{ repo_files_path }}/packages.microsoft.gpg"
+    file: "{{ ubuntu_packages_files_path }}/packages.microsoft.gpg"
     keyring: /etc/apt/trusted.gpg.d/packages.microsoft.gpg
   register: add_ms_pkg_apt_key
   become: yes
