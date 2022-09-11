@@ -32,7 +32,8 @@
         repo: https://github.com/johnlayton/asdf-kind.git
         versions:
           - 0.11.1
-        global: 0.11.1
+          - 0.15.0
+        global: 0.15.0
       - name: kubectl
         repo: https://github.com/Banno/asdf-kubectl.git
         versions:
