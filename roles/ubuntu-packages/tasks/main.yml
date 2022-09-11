@@ -26,7 +26,7 @@
 
 - name: Add virtualbox apt repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian focal contrib"
+    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ lsb_release_cs.stdout }} contrib"
   register: add_vbox_apt_repo
   become: yes
 
