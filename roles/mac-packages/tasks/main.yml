@@ -31,6 +31,17 @@
       - postman
       - slack
       - sublime-text
+      - visual-studio-code
+
+- name: Get architecture of system
+  shell: uname -m
+  args:
+    executable: /bin/bash
+  register: get_system_arch
+
+- name: Install software for x86_64 systems only
+  homebrew_cask:
+    name:
       - virtualbox
       - virtualbox-extension-pack
-      - visual-studio-code
+  when: get_system_arch.stdout == "x86_64"
