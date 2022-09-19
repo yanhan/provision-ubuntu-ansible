@@ -34,10 +34,11 @@
       - visual-studio-code
 
 - name: Get architecture of system
-  shell: uname -m
+  ansible.builtin.shell: uname -m
   args:
     executable: /bin/bash
   register: get_system_arch
+  changed_when: False
 
 - name: Install software for x86_64 systems only
   homebrew_cask:
