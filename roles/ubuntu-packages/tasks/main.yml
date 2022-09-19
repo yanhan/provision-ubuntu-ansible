@@ -184,6 +184,7 @@
       - pwgen
       - pv
       - r-base
+      - remmina
       - ripgrep
       - screen
       - scrot
