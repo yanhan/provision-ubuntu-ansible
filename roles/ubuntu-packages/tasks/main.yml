@@ -233,3 +233,22 @@
   ansible.builtin.apt:
     deb: "{{ libffi6.download_dest }}"
   become: yes
+
+- name: Check if bat is installed
+  ansible.builtin.shell: dpkg -L bat
+  register: check_if_bat_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Download bat debian package
+  ansible.builtin.get_url:
+    url: "{{ bat.url }}"
+    dest: "{{ bat.download_dest }}"
+    sha256sum: "{{ bat.sha256sum }}"
+    mode: 0644
+  when: check_if_bat_installed.rc != 0
+
+- name: Install bat
+  ansible.builtin.apt:
+    deb: "{{ bat.download_dest }}"
+  become: yes
