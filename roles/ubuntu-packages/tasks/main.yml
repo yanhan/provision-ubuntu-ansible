@@ -146,6 +146,7 @@
       - expat
       - expect
       - ffmpeg
+      - fd-find
       - firefox
       - g++
       - gcc
