@@ -2,6 +2,11 @@
 - name: Set fact for asdf managed plugins and tools
   ansible.builtin.set_fact:
     asdf_plugins:
+      - name: argocd
+        repo: https://github.com/beardix/asdf-argocd.git
+        versions:
+          - 2.5.1
+        global: 2.5.1
       - name: doctl
         repo: https://github.com/maristgeek/asdf-doctl.git
         versions:
