@@ -8,6 +8,15 @@
   tags:
     - dotfiles
 
+- name: clone zsh-nvm repository for lazy loading nvm
+  ansible.builtin.git:
+    repo: https://github.com/lukechilds/zsh-nvm.git
+    dest: ~/.zsh-nvm
+    accept_newhostkey: yes
+    update: no
+  tags:
+    - dotfiles
+
 - name: clone dotfiles repository
   ansible.builtin.git:
     repo: https://github.com/yanhan/dotfiles.git
