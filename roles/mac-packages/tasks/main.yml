@@ -1,6 +1,6 @@
 ---
 - name: Install software using brew
-  homebrew:
+  community.general.homebrew:
     name:
       - autojump
       - aws-vault
@@ -24,7 +24,7 @@
     update_homebrew: true
 
 - name: Install software using brew cask
-  homebrew_cask:
+  community.general.homebrew_cask:
     name:
       - firefox
       - iterm2
@@ -41,7 +41,7 @@
   changed_when: False
 
 - name: Install software for x86_64 systems only
-  homebrew_cask:
+  community.general.homebrew_cask:
     name:
       - virtualbox
       - virtualbox-extension-pack
