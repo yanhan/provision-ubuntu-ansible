@@ -17,6 +17,7 @@
       - reattach-to-user-namespace
       - ripgrep
       - tmux
+      - vault
       - vim
       - wget
       - yamllint
