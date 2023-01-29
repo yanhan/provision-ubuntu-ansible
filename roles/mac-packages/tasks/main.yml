@@ -23,6 +23,10 @@
       - zsh
     update_homebrew: true
 
+- name: Tap homebrew/cask-versions
+  community.general.homebrew_tap:
+    name: homebrew/cask-versions
+
 - name: Install software using brew cask
   community.general.homebrew_cask:
     name:
