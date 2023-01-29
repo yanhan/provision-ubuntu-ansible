@@ -37,6 +37,7 @@
       - slack
       - sublime-text
       - visual-studio-code
+  become: yes
 
 - name: Get architecture of system
   ansible.builtin.shell: uname -m
