@@ -32,6 +32,10 @@ bat:
   url: "https://github.com/sharkdp/bat/releases/download/v0.22.1/bat-musl_0.22.1_amd64.deb"
   sha256sum: 095fa945b775be944f660875cfe80218898c210615b6584faea31a4060ba3463
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/bat-musl_0.22.1_amd64.deb"
+nvim:
+  url: "https://github.com/neovim/neovim/releases/download/v0.8.3/nvim.appimage"
+  sha256sum: 05f7a2cb177f4506882b7cd867d82207c79066e7a9550e4ef78e6eac537dd4a8
+  download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/nvim.appimage"
 
 # texlive role
 home_fonts_path: "{{ home_path }}/.fonts/"

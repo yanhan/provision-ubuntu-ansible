@@ -100,12 +100,6 @@
   register: add_gitcore_ppa
   become: yes
 
-- name: Add neovim ppa
-  ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/stable
-  register: add_neovim_ppa
-  become: yes
-
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   ansible.builtin.shell: |
     set -euo pipefail
@@ -126,7 +120,7 @@
 - name: apt-get update
   ansible.builtin.apt:
     update_cache: yes
-  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_hashicorp_apt_key.changed or add_hashicorp_apt_repo.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed or add_neovim_ppa.changed  # noqa no-handler
+  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_hashicorp_apt_key.changed or add_hashicorp_apt_repo.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed  # noqa no-handler
   become: yes
 
 - name: List the packages to install
@@ -178,7 +172,6 @@
       - make
       - mc    # midnight commander
       - net-tools
-      - neovim
       - octave
       - openjdk-8-jdk
       - protobuf-compiler
@@ -251,4 +244,27 @@
 - name: Install bat
   ansible.builtin.apt:
     deb: "{{ bat.download_dest }}"
+  become: yes
+
+- name: Check if neovim is installed
+  ansible.builtin.shell: command -v nvim >/dev/null 2>&1
+  register: check_if_neovim_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Download nvim.appimage
+  ansible.builtin.get_url:
+    url: "{{ nvim.url }}"
+    dest: "{{ nvim.download_dest }}"
+    sha256sum: "{{ nvim.sha256sum }}"
+    mode: 0755
+  when: check_if_neovim_installed.rc != 0
+
+- name: Copy nvim.appimage to /usr/local/bin
+  delegate_to: localhost
+  ansible.builtin.copy:
+    src: "{{ nvim.download_dest }}"
+    dest: /usr/local/bin/nvim
+    mode: 0755
+    owner: root
   become: yes
