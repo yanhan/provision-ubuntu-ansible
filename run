@@ -84,7 +84,7 @@ if ! test -d "${pyenv_venv_dir}"; then
   eval "$(pyenv virtualenv-init -)"
 fi
 
-readonly python_version=3.10.4
+readonly python_version=3.11.2
 if [ "$(grep -c "${python_version}" <<< "$(pyenv versions)")" -eq 0 ]; then
   pyenv install "${python_version}"
 fi
