@@ -228,7 +228,7 @@
   become: yes
 
 - name: Check if bat is installed
-  ansible.builtin.shell: dpkg -L bat
+  ansible.builtin.shell: dpkg -L bat-musl
   register: check_if_bat_installed
   ignore_errors: true
   changed_when: false
