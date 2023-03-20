@@ -84,8 +84,8 @@
     repo: https://github.com/asdf-vm/asdf.git
     dest: "{{ home_path }}/.asdf"
     accept_newhostkey: yes
-    update: no
-    version: v0.10.2
+    update: yes
+    version: v0.11.3
   tags:
     - asdf
 
