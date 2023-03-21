@@ -17,6 +17,15 @@
   tags:
     - dotfiles
 
+- name: clone packer.nvim repo to manage neovim plugins
+  ansible.builtin.git:
+    repo: https://github.com/wbthomason/packer.nvim
+    dest: "{{ home_path }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    accept_newhostkey: yes
+    update: no
+  tags:
+    - dotfiles
+
 - name: clone dotfiles repository
   ansible.builtin.git:
     repo: https://github.com/yanhan/dotfiles.git
