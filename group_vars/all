@@ -10,7 +10,7 @@ code_dir_path: "{{ home_path }}/code"
 repo_path: "{{ code_dir_path }}/provision-ubuntu-ansible"
 
 # file dirs
-ubuntu_packages_files_path: "{{ repo_path }}/roles/ubuntu-packages/files"
+ubuntu_packages_files_path: "{{ repo_path }}/roles/ubuntu_packages/files"
 system_files_path: "{{ repo_path }}/roles/system/files"
 ubuntu_packages_tmp_downloads_path: "{{ ubuntu_packages_files_path }}/tmp_downloads"
 
@@ -23,7 +23,7 @@ nvm_install_script_path: "{{ system_files_path }}/install-nvm-0.39.1.sh"
 nvm_dir: "{{ home_path }}/.nvm"
 nodejs_version: v16.14.2
 
-# ubuntu-packages role
+# ubuntu_packages role
 libffi6:
   url: "https://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb"
   sha256sum: fa26945b0aadfc72ec623c68be9cc59235a7fe42e2388f7015fd131f4fb06dc9

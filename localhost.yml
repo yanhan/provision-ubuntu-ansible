@@ -8,12 +8,12 @@
         executable: /bin/bash
       register: get_os
   roles:
-    - role: ubuntu-packages
+    - role: ubuntu_packages
       when: get_os.stdout == "Linux"
-    - role: mac-packages
+    - role: mac_packages
       when: get_os.stdout == "Darwin"
     - role: system
-    - role: ubuntu-misc
+    - role: ubuntu_misc
       when: get_os.stdout == "Linux"
     - role: texlive
       tags:

@@ -4,5 +4,5 @@
 !/roles/system/files/tmp_downloads/.gitkeep
 /roles/texlive/files/debian-equivs-*.txt
 /roles/texlive/files/install-tl-unx.tar.gz
-/roles/ubuntu-packages/files/tmp_downloads
-!/roles/ubuntu-packages/files/tmp_downloads/.gitkeep
+/roles/ubuntu_packages/files/tmp_downloads
+!/roles/ubuntu_packages/files/tmp_downloads/.gitkeep
