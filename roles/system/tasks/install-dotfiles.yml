@@ -55,10 +55,10 @@
 
 - name: Compare init.vim contents
   ansible.builtin.shell: |
-    diff -q {{ home_path }}/dotfiles/templates/init.vim {{ home_path }}/.config/nvim/init.vim
+    diff -q {{ home_path }}/dotfiles/nvim-lua/init.lua {{ home_path }}/.config/nvim/init.lua
   args:
     executable: /bin/bash
-  register: init_vim_diff
+  register: init_lua_diff
   changed_when: false
   ignore_errors: true
   tags:
@@ -66,9 +66,9 @@
 
 - name: Notify setup dotfiles handler if needed
   ansible.builtin.debug:
-    var: init_vim_diff
+    var: init_lua_diff
   notify: setup dotfiles repository
   changed_when: true
-  when: init_vim_diff.rc != 0
+  when: init_lua_diff.rc != 0
   tags:
     - dotfiles
