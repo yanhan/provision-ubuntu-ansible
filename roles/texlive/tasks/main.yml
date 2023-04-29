@@ -3,14 +3,14 @@
   ansible.builtin.get_url:
     url: "https://www.tug.org/texlive/files/debian-equivs-2018-ex.txt"
     dest: "{{ texlive_equivs_file_path }}"
-    sha256sum: "26b9f61431749c342c32b469104eb44ffefaee6c51697323aec12e07e3980b06"
+    checksum: "sha256:26b9f61431749c342c32b469104eb44ffefaee6c51697323aec12e07e3980b06"
     mode: 0644
 
 - name: Download texlive installer
   ansible.builtin.get_url:
     url: "http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz"
     dest: "{{ texlive_unix_installer_gz_path }}"
-    sha256sum: "bcd53189996e145b210d9dc71e410ff748e8a597b91e46c982fdde4b393f8aef"
+    checksum: "sha256:bcd53189996e145b210d9dc71e410ff748e8a597b91e46c982fdde4b393f8aef"
     mode: 0644
 
 # we do this because we're gonna install TeXLive manually

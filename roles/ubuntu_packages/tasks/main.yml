@@ -218,7 +218,7 @@
   ansible.builtin.get_url:
     url: "{{ libffi6.url }}"
     dest: "{{ libffi6.download_dest }}"
-    sha256sum: "{{ libffi6.sha256sum }}"
+    checksum: "sha256:{{ libffi6.sha256sum }}"
     mode: 0644
   when: check_if_libffi6_installed.rc != 0
 
@@ -237,7 +237,7 @@
   ansible.builtin.get_url:
     url: "{{ bat.url }}"
     dest: "{{ bat.download_dest }}"
-    sha256sum: "{{ bat.sha256sum }}"
+    checksum: "sha256:{{ bat.sha256sum }}"
     mode: 0644
   when: check_if_bat_installed.rc != 0
 
@@ -256,7 +256,7 @@
   ansible.builtin.get_url:
     url: "{{ nvim.url }}"
     dest: "{{ nvim.download_dest }}"
-    sha256sum: "{{ nvim.sha256sum }}"
+    checksum: "sha256:{{ nvim.sha256sum }}"
     mode: 0755
   when: check_if_neovim_installed.rc != 0
 
