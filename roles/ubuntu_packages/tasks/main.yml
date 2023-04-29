@@ -268,3 +268,22 @@
     mode: 0755
     owner: root
   become: yes
+
+- name: Check if balena etcher is installed
+  ansible.builtin.shell: dpkg -L balena-etcher
+  register: check_if_balena_etcher_installed
+  ignore_errors: true
+  changed_when: false
+
+- name: Download balena etcher debian package
+  ansible.builtin.get_url:
+    url: "{{ balena_etcher.url }}"
+    dest: "{{ balena_etcher.download_dest }}"
+    checksum: "sha256:{{ balena_etcher.sha256sum }}"
+    mode: 0644
+  when: check_if_balena_etcher_installed.rc != 0
+
+- name: Install balena etcher
+  ansible.builtin.apt:
+    deb: "{{ balena_etcher.download_dest }}"
+  become: yes

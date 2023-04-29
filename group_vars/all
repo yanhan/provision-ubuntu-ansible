@@ -37,6 +37,11 @@ nvim:
   sha256sum: 05f7a2cb177f4506882b7cd867d82207c79066e7a9550e4ef78e6eac537dd4a8
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/nvim.appimage"
 
+balena_etcher:
+  url: "https://github.com/balena-io/etcher/releases/download/v1.18.8/balena-etcher_1.18.8_amd64.deb"
+  sha256sum: de4a2666b90d3de6b3203cb0a583845f2b4b45dc856e1426e986b30754b0d5e4
+  download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/balena-etcher_1.18.8_amd64.deb"
+
 # texlive role
 home_fonts_path: "{{ home_path }}/.fonts/"
 texlive_files_path: "{{ repo_path }}/roles/texlive/files"
