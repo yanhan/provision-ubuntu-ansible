@@ -148,6 +148,7 @@
       - gimp
       - git
       - gnupg-agent
+      - gparted
       - htop
       - imagemagick
       - iptables-persistent
