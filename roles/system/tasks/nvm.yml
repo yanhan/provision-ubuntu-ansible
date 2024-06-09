@@ -51,3 +51,13 @@
   tags:
     - never
     - upgrade_nvm
+
+- name: Set default nodejs version
+  ansible.builtin.shell: |
+    NVM_DIR="{{ nvm_dir }}" && source "${NVM_DIR}"/nvm.sh && nvm alias default {{ nodejs_version }}
+  args:
+    executable: /bin/bash
+  changed_when: False
+  tags:
+    - nvm
+    - upgrade_nvm
