@@ -6,6 +6,9 @@
   register: check_nvm_installed
   ignore_errors: true
   changed_when: false
+  tags:
+    - nvm
+    - upgrade_nvm
 
 - name: Ensure $HOME/.nvm directory exists
   ansible.builtin.file:
@@ -13,10 +16,15 @@
     state: directory
     owner: "{{ ansible_env.USER }}"
     mode: 0700
+  tags:
+    - nvm
+    - upgrade_nvm
 
 - name: Install nvm
   ansible.builtin.shell: "{{ nvm_install_script_path }}"
   when: check_nvm_installed.rc != 0
+  tags:
+    - nvm
 
 - name: Install nodejs using nvm
   ansible.builtin.shell: |
@@ -24,3 +32,22 @@
   args:
     executable: /bin/bash
   changed_when: False
+  tags:
+    - nvm
+
+- name: Upgrade nvm
+  ansible.builtin.shell: "{{ nvm_install_script_path }}"
+  changed_when: False
+  tags:
+    - never
+    - upgrade_nvm
+
+- name: Install nodejs using nvm when upgrading nvm
+  ansible.builtin.shell: |
+    NVM_DIR="{{ nvm_dir }}" && source "${NVM_DIR}"/nvm.sh && nvm install {{ nodejs_version }}
+  args:
+    executable: /bin/bash
+  changed_when: False
+  tags:
+    - never
+    - upgrade_nvm

@@ -19,9 +19,9 @@ dotfiles_repo_path: "{{ home_path }}/dotfiles"
 zsh_git_prompt_repo_path: "{{ code_dir_path }}/zsh-git-prompt"
 
 # system role
-nvm_install_script_path: "{{ system_files_path }}/install-nvm-0.39.1.sh"
+nvm_install_script_path: "{{ system_files_path }}/install-nvm-0.39.7.sh"
 nvm_dir: "{{ home_path }}/.nvm"
-nodejs_version: v16.14.2
+nodejs_version: v20.14.0
 
 # ubuntu_packages role
 libffi6:

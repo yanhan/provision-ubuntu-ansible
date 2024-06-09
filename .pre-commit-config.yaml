@@ -16,10 +16,10 @@ repos:
         args: ["-i", "2", "-sr"]
         exclude: |
           (?x)^(
-            roles/system/files/install-nvm-0.35.0.sh
+            roles/system/files/install-nvm-0.39.7.sh
           )$
       - id: shellcheck
         exclude: |
           (?x)^(
-            roles/system/files/install-nvm-0.35.0.sh
+            roles/system/files/install-nvm-0.39.7.sh
           )
