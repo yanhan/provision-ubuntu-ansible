@@ -100,6 +100,12 @@
   register: add_gitcore_ppa
   become: yes
 
+- name: Add brightness-controller ppa
+  ansible.builtin.apt_repository:
+    repo: ppa:apandada1/brightness-controller
+  register: add_brightness_controller_ppa
+  become: yes
+
 - name: Check if we need to perform apt-get update (if last update was > 1 day ago OR if we just replaced apt sg mirror)
   ansible.builtin.shell: |
     set -euo pipefail
@@ -120,7 +126,7 @@
 - name: apt-get update
   ansible.builtin.apt:
     update_cache: yes
-  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_hashicorp_apt_key.changed or add_hashicorp_apt_repo.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed  # noqa no-handler
+  when: ag_update.stdout == "please update" or add_vbox_apt_key.changed or add_vbox_apt_repo.changed or add_subl_apt_key.changed or add_subl_apt_repo.changed or add_gcloud_apt_key.changed or add_hashicorp_apt_key.changed or add_hashicorp_apt_repo.changed or add_docker_apt_key.changed or add_docker_apt_repo.changed or add_ms_pkg_apt_key.changed or add_ms_apt_repo.changed or add_gitcore_ppa.changed or add_brightness_controller_ppa.changed  # noqa no-handler
   become: yes
 
 - name: List the packages to install
@@ -128,6 +134,7 @@
     ubuntu_packages:
       - apt-transport-https
       - autojump
+      - brightness-controller
       - ca-certificates
       - chromium-browser
       - code
