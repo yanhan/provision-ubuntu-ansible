@@ -314,3 +314,9 @@
   ansible.builtin.apt:
     deb: "{{ balena_etcher.download_dest }}"
   become: yes
+
+- name: Install Eclipse
+  community.general.snap:
+    classic: true
+    name: eclipse
+  become: yes
