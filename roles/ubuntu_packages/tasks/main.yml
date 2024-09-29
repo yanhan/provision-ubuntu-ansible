@@ -260,13 +260,31 @@
   ignore_errors: true
   changed_when: false
 
+- name: Get neovim version
+  ansible.builtin.shell: |
+    set -euo pipefail
+    nvim --version | head -1 | cut -d' ' -f2
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: neovim_version
+  when: check_if_neovim_installed.rc == 0
+
+- name: Get intended neovim version
+  ansible.builtin.shell: "sed -E 's#https://github.com/neovim/neovim/releases/download/([^/]+)/nvim.appimage#\\1#' <<< '{{ nvim.url }}'"  # noqa command-instead-of-module
+  args:
+    executable: /bin/bash
+  changed_when: false
+  register: intended_neovim_version
+  when: check_if_neovim_installed.rc == 0
+
 - name: Download nvim.appimage
   ansible.builtin.get_url:
     url: "{{ nvim.url }}"
     dest: "{{ nvim.download_dest }}"
     checksum: "sha256:{{ nvim.sha256sum }}"
     mode: 0755
-  when: check_if_neovim_installed.rc != 0
+  when: check_if_neovim_installed.rc != 0 or neovim_version.stdout != intended_neovim_version.stdout
 
 - name: Copy nvim.appimage to /usr/local/bin
   delegate_to: localhost
@@ -276,6 +294,7 @@
     mode: 0755
     owner: root
   become: yes
+  when: check_if_neovim_installed.rc != 0 or neovim_version.stdout != intended_neovim_version.stdout
 
 - name: Check if balena etcher is installed
   ansible.builtin.shell: dpkg -L balena-etcher
