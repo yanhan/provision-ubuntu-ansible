@@ -111,6 +111,28 @@
   tags:
     - asdf
 
+- name: Download asdf for Darwin arm64
+  ansible.builtin.get_url:
+    url: "{{ asdf_darwin_arm64.url }}"
+    dest: "{{ asdf_darwin_arm64.download_dest }}"
+    checksum: "sha256:{{ asdf_darwin_arm64.sha256sum }}"
+    mode: 0644
+  when: check_if_asdf_installed.rc != 0 and 'Darwin' in get_system_arch_for_asdf.stdout and 'arm64' in get_system_arch_for_asdf.stdout
+  tags:
+    - asdf
+
+- name: Untar asdf and copy to /usr/local/bin for Darwin arm64
+  delegate_to: localhost
+  ansible.builtin.unarchive:
+    src: "{{ asdf_darwin_arm64.download_dest }}"
+    dest: /usr/local/bin
+    mode: 0755
+    owner: root
+  become: yes
+  when: check_if_asdf_installed.rc != 0 and 'Darwin' in get_system_arch_for_asdf.stdout and 'arm64' in get_system_arch_for_asdf.stdout
+  tags:
+    - asdf
+
 - name: Add asdf plugins
   ansible.builtin.shell: |
     if [[ "$(grep -c  "{{ item.name }}" <<< "$(asdf plugin list)")" -eq 0 ]]; then
