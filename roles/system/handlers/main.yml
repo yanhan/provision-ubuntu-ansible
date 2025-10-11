@@ -1,2 +1,8 @@
 ---
-- include: dotfiles.yml
+- name: setup dotfiles repository
+  ansible.builtin.shell: python setup_home_folder_dotfiles.py gitconfig nvim tmux.conf zshrc
+  args:
+    chdir: "{{ dotfiles_repo_path }}"
+    executable: /bin/bash
+  tags:
+    - dotfiles

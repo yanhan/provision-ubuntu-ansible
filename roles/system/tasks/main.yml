@@ -1,21 +1,21 @@
 ---
 - name: Install zsh-git-prompt
-  include: install-zsh-git-prompt.yml
+  include_tasks: install-zsh-git-prompt.yml
 
-- include: install-dotfiles.yml
+- include_tasks: install-dotfiles.yml
 
 - name: Install asdf
-  include: install-asdf.yml
+  include_tasks: install-asdf.yml
   tags:
     - asdf
 
 - name: Install ops tools
-  include: install-ops-tools.yml
+  include_tasks: install-ops-tools.yml
   tags:
     - ops
 
 - name: Install nvm
-  include: nvm.yml
+  include_tasks: nvm.yml
 
 - name: Install global npm packages
-  include: npm-packages.yml
+  include_tasks: npm-packages.yml

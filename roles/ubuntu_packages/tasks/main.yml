@@ -200,7 +200,7 @@
       - unzip
       - vagrant
       - vim
-      - virtualbox-6.1
+      # - virtualbox-6.1
       - vlc
       - xchm
       - xclip
