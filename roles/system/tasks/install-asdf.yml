@@ -72,6 +72,15 @@
   tags:
     - asdf
 
+- name: Get architecture of system
+  ansible.builtin.shell: uname -m
+  args:
+    executable: /bin/bash
+  register: get_system_arch_for_asdf
+  changed_when: False
+  tags:
+    - asdf
+
 - name: Check if asdf is installed
   ansible.builtin.shell: command -v asdf >/dev/null 2>&1
   register: check_if_asdf_installed
@@ -80,20 +89,20 @@
   tags:
     - asdf
 
-- name: Download asdf
+- name: Download asdf for x86_64
   ansible.builtin.get_url:
-    url: "{{ asdf.url }}"
-    dest: "{{ asdf.download_dest }}"
-    checksum: "sha256:{{ asdf.sha256sum }}"
+    url: "{{ asdf_x86_64.url }}"
+    dest: "{{ asdf_x86_64.download_dest }}"
+    checksum: "sha256:{{ asdf_x86_64.sha256sum }}"
     mode: 0644
-  when: check_if_asdf_installed.rc != 0
+  when: check_if_asdf_installed.rc != 0 and get_system_arch_for_asdf.stdout == "x86_64"
   tags:
     - asdf
 
 - name: Untar asdf and copy to /usr/local/bin
   delegate_to: localhost
   ansible.builtin.unarchive:
-    src: "{{ asdf.download_dest }}"
+    src: "{{ asdf_x86_64.download_dest }}"
     dest: /usr/local/bin
     mode: 0755
     owner: root

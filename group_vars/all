@@ -43,7 +43,7 @@ balena_etcher:
   sha256sum: de4a2666b90d3de6b3203cb0a583845f2b4b45dc856e1426e986b30754b0d5e4
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/balena-etcher_1.18.8_amd64.deb"
 
-asdf:
+asdf_x86_64:
   url: "https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz"
   sha256sum: 4d3007070166cb0a652af26c3f0462b021e04cb26c4ab13894d13689da89f5b8
   download_dest: "{{ system_files_tmp_downloads_path }}/asdf-v0.18.0-linux-amd64.tar.gz"
