@@ -11,8 +11,9 @@ repo_path: "{{ code_dir_path }}/provision-ubuntu-ansible"
 
 # file dirs
 ubuntu_packages_files_path: "{{ repo_path }}/roles/ubuntu_packages/files"
-system_files_path: "{{ repo_path }}/roles/system/files"
 ubuntu_packages_tmp_downloads_path: "{{ ubuntu_packages_files_path }}/tmp_downloads"
+system_files_path: "{{ repo_path }}/roles/system/files"
+system_files_tmp_downloads_path: "{{ system_files_path }}/tmp_downloads"
 
 # repos
 dotfiles_repo_path: "{{ home_path }}/dotfiles"
@@ -41,6 +42,11 @@ balena_etcher:
   url: "https://github.com/balena-io/etcher/releases/download/v1.18.8/balena-etcher_1.18.8_amd64.deb"
   sha256sum: de4a2666b90d3de6b3203cb0a583845f2b4b45dc856e1426e986b30754b0d5e4
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/balena-etcher_1.18.8_amd64.deb"
+
+asdf:
+  url: "https://github.com/asdf-vm/asdf/releases/download/v0.18.0/asdf-v0.18.0-linux-amd64.tar.gz"
+  sha256sum: 4d3007070166cb0a652af26c3f0462b021e04cb26c4ab13894d13689da89f5b8
+  download_dest: "{{ system_files_tmp_downloads_path }}/asdf-v0.18.0-linux-amd64.tar.gz"
 
 # texlive role
 home_fonts_path: "{{ home_path }}/.fonts/"
