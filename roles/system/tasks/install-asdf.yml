@@ -99,7 +99,7 @@
   tags:
     - asdf
 
-- name: Untar asdf and copy to /usr/local/bin
+- name: Untar asdf and copy to /usr/local/bin for x86_64
   delegate_to: localhost
   ansible.builtin.unarchive:
     src: "{{ asdf_x86_64.download_dest }}"
@@ -107,7 +107,7 @@
     mode: 0755
     owner: root
   become: yes
-  when: check_if_asdf_installed.rc != 0
+  when: check_if_asdf_installed.rc != 0 and get_system_arch_for_asdf.stdout == "x864_64"
   tags:
     - asdf
 
