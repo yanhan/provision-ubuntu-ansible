@@ -72,8 +72,8 @@
   tags:
     - asdf
 
-- name: Get architecture of system
-  ansible.builtin.shell: uname -m
+- name: Get OS and architecture of system
+  ansible.builtin.shell: uname -a
   args:
     executable: /bin/bash
   register: get_system_arch_for_asdf
@@ -95,7 +95,7 @@
     dest: "{{ asdf_x86_64.download_dest }}"
     checksum: "sha256:{{ asdf_x86_64.sha256sum }}"
     mode: 0644
-  when: check_if_asdf_installed.rc != 0 and get_system_arch_for_asdf.stdout == "x86_64"
+  when: check_if_asdf_installed.rc != 0 and 'Linux' in get_system_arch_for_asdf.stdout and 'x86_64' in get_system_arch_for_asdf.stdout
   tags:
     - asdf
 
@@ -107,7 +107,7 @@
     mode: 0755
     owner: root
   become: yes
-  when: check_if_asdf_installed.rc != 0 and get_system_arch_for_asdf.stdout == "x86_64"
+  when: check_if_asdf_installed.rc != 0 and 'Linux' in get_system_arch_for_asdf.stdout and 'x86_64' in get_system_arch_for_asdf.stdout
   tags:
     - asdf
 
