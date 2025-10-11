@@ -39,12 +39,6 @@
           - 0.15.0
           - 0.17.0
         global: 0.17.0
-      - name: kubectl
-        repo: https://github.com/Banno/asdf-kubectl.git
-        versions:
-          - 1.23.10
-          - 1.24.12
-        global: 1.24.12
       - name: lua
         repo: https://github.com/Stratus3D/asdf-lua.git
         versions:

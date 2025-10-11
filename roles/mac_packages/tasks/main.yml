@@ -4,8 +4,12 @@
     name:
       - autojump
       - aws-vault
+      - bash-completion
+      - cmake
       - coreutils
       - exiftool
+      - gnu-tar
+      - go-jsonnet
       - gpg
       - htop
       - ipcalc
@@ -16,28 +20,13 @@
       - pv
       - reattach-to-user-namespace
       - ripgrep
+      - saml2aws
       - tmux
-      - vault
       - vim
       - wget
       - yamllint
       - zsh
     update_homebrew: true
-
-- name: Tap homebrew/cask-versions
-  community.general.homebrew_tap:
-    name: homebrew/cask-versions
-
-- name: Install software using brew cask
-  community.general.homebrew_cask:
-    name:
-      - firefox
-      - iterm2
-      - postman
-      - slack
-      - sublime-text
-      - visual-studio-code
-  become: yes
 
 - name: Get architecture of system
   ansible.builtin.shell: uname -m
