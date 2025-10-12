@@ -2,6 +2,11 @@
 - name: Install zsh-git-prompt
   include_tasks: install-zsh-git-prompt.yml
 
+- name: Install fzf
+  include_tasks: install-fzf.yml
+  tags:
+    - fzf
+
 - include_tasks: install-dotfiles.yml
 
 - name: Install asdf
