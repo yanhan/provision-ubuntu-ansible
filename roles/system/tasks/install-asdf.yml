@@ -49,6 +49,11 @@
         versions:
           - 5.4.7
         global: 5.4.7
+      - name: lua-language-server
+        repo: https://github.com/bellini666/asdf-lua-language-server.git
+        versions:
+          - 3.15.0
+        global: 3.15.0
       - name: pre-commit
         repo: https://github.com/jonathanmorley/asdf-pre-commit.git
         versions:
