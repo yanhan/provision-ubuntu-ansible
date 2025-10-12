@@ -271,7 +271,7 @@
   when: check_if_neovim_installed.rc == 0
 
 - name: Get intended neovim version
-  ansible.builtin.shell: "sed -E 's#https://github.com/neovim/neovim/releases/download/([^/]+)/nvim.appimage#\\1#' <<< '{{ nvim.url }}'"  # noqa command-instead-of-module
+  ansible.builtin.shell: "sed -E 's#https://github.com/neovim/neovim/releases/download/([^/]+)/nvim-linux-x86_64.appimage#\\1#' <<< '{{ nvim.url }}'"  # noqa command-instead-of-module
   args:
     executable: /bin/bash
   changed_when: false

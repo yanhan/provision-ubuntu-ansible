@@ -34,8 +34,8 @@ bat:
   sha256sum: 095fa945b775be944f660875cfe80218898c210615b6584faea31a4060ba3463
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/bat-musl_0.22.1_amd64.deb"
 nvim:
-  url: "https://github.com/neovim/neovim/releases/download/v0.10.1/nvim.appimage"
-  sha256sum: c4762d54cadfd9fa4497c7969197802c9cf9e0d926c39e561f0bd170e36c8aa0
+  url: "https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.appimage"
+  sha256sum: 79e7e160f9505819a5e12f3d9366be94213f5309fb912ef4ef3af52df3982977
   download_dest: "{{ ubuntu_packages_tmp_downloads_path }}/nvim.appimage"
 
 balena_etcher:
