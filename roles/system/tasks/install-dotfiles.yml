@@ -53,7 +53,7 @@
   tags:
     - dotfiles
 
-- name: Compare init.vim contents
+- name: Compare neovim init.lua contents
   ansible.builtin.shell: |
     diff -q {{ home_path }}/dotfiles/nvim-lua/init.lua {{ home_path }}/.config/nvim/init.lua
   args:
